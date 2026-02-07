@@ -55,12 +55,12 @@ uv run python scripts/plot_site_facets.py
 4. Render report:
 
 ```bash
-/usr/bin/quarto render final_report.qmd --to html
+/usr/bin/quarto render index.qmd --to html
 ```
 
 ## Main Outputs
 
-- `final_report.html`
+- `index.html`
 - `data/processed/allocation_comparison_summary.csv`
 - `data/processed/site_day_allocation_comparison.csv`
 - `outputs/figures/status_quo_vs_optimal_allocations.png`
