@@ -1,0 +1,88 @@
+
+### 1. Scope and Time Horizon
+
+We solve a **single static LP** over two strike days:
+
+- Monday: `2026-02-09`
+- Tuesday: `2026-02-10`
+
+Static means both days are optimized jointly in one model run (not sequentially).
+
+### 2. Sets and Indices
+
+- $I$: demand nodes (SF Census tracts)
+- $J$: supply nodes (meal distribution sites)
+- $D = \{2026\text{-}02\text{-}09,\ 2026\text{-}02\text{-}10\}$: days
+- $M$: meal types (`lunch`, optionally `breakfast`)
+
+### 3. Inputs (Parameters)
+
+- $s_{j,d,m}$: meals available at site $j$, day $d$, meal type $m$
+  - from `data/processed/site_day_supply.csv`
+- $p_i$: child population (`age < 18`) in tract $i$
+  - from Census API (ACS most recent 5-year release at runtime)
+  - current extraction: ACS 2024, SF county tracts
+- $r_m$: participation rate for meal type $m$
+- $\mathrm{dem}_{i,d,m}$: expected demand, typically $p_i \cdot r_m$
+  - current generated input: `data/processed/tract_day_demand.csv`
+- $c_{i,j}$: access/transport cost from tract $i$ to site $j$
+  - current generated input: `data/processed/tract_site_cost_matrix.csv`
+  - metric: haversine straight-line distance in miles ($c_{ij} = \mathrm{distance\_miles}$)
+- $\lambda_m$: unmet-demand penalty weight
+
+### 4. Decision Variables
+
+- $x_{i,j,d,m} \ge 0$: meals of type $m$ allocated from site $j$ to tract $i$ on day $d$
+- $u_{i,d,m} \ge 0$: unmet meals of type $m$ in tract $i$ on day $d$
+
+### 5. Objective
+
+Minimize transport burden and unmet demand across both days:
+
+$$
+\min \sum_{i,j,d,m} c_{i,j}\,x_{i,j,d,m} \;+\; \sum_{i,d,m} \lambda_m\,u_{i,d,m}
+$$
+
+### 6. Constraints
+
+1. Site/day/meal capacity:
+   - $\sum_i x_{i,j,d,m} \le s_{j,d,m}$ for all $(j,d,m)$
+2. Demand balance:
+   - $\sum_j x_{i,j,d,m} + u_{i,d,m} = \mathrm{dem}_{i,d,m}$ for all $(i,d,m)$
+3. Non-negativity:
+   - $x_{i,j,d,m} \ge 0$, $u_{i,d,m} \ge 0$
+4. Optional policy constraints:
+   - maximum service radius ($x_{i,j,d,m}=0$ if $c_{i,j}$ exceeds threshold)
+   - equity floor by neighborhood
+
+### 7. Initial Modeling Choice
+
+Baseline run:
+
+- include `lunch` only
+- set `M = {lunch}`
+- extend to `breakfast` in sensitivity if needed
+
+This keeps the first solve aligned with the largest available capacity block.
+
+Comparison setup used for status-quo vs optimized site allocations:
+
+- `status_quo` model: $\sum_i x_{i,j,d} \le s_{j,d}$ with fixed listed site-day supply.
+- `optimal_reallocation` model:
+  - introduces $y_{j,d}$ as optimized site-day meals
+  - enforces $\sum_i x_{i,j,d} \le y_{j,d}$
+  - conserves day-total meals: $\sum_j y_{j,d} = \sum_j s_{j,d}$
+  - cap on per-site reallocation: $y_{j,d} \le \alpha \cdot s_{j,d}$ with $\alpha = 2.0$ in baseline run
+  - unmet penalty set to $\lambda = 100$.
+
+### 8. Execution Log
+
+- [x] Fixed planning horizon to Monday/Tuesday (`2026-02-09`, `2026-02-10`).
+- [x] Built supply input table (`data/processed/site_day_supply.csv`).
+- [x] Built tract-level `p_i` from Census API (`data/processed/tract_child_population.csv`, ACS 2024, 244 tracts).
+- [x] Built tract/day demand scenarios (`data/processed/tract_day_demand.csv`, participation rates `0.2, 0.3, 0.4`).
+- [x] Defined `c_{i,j}` matrix (`data/processed/tract_site_cost_matrix.csv`, 244x40 pairs).
+- [x] Solved baseline comparison LP and exported:
+  - `data/processed/allocation_comparison_summary.csv`
+  - `data/processed/site_day_allocation_comparison.csv`
+  - `outputs/figures/status_quo_vs_optimal_allocations.png`

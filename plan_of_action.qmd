@@ -1,0 +1,173 @@
+---
+title: "SF School Strike Lunch Allocation: Plan of Action"
+format:
+  html:
+    toc: true
+    number-sections: true
+    embed-resources: true
+execute:
+  echo: true
+---
+
+## 1. Objective
+
+Build a reproducible pipeline to estimate child demand (`age < 18`) across San Francisco and compute an optimal packed-lunch allocation plan during the SFUSD strike week.
+
+Working assumption for this project: **two strike days only, Monday February 9, 2026 and Tuesday February 10, 2026**.
+
+## 2. Core Data Sources
+
+1. Meal-site supply and schedule:
+   - Source: <https://www.sf.gov/departments--children-youth-and-their-families/free-youth-meals-sfusd-school-strike>
+   - Fields needed: site name, address, day, meal type, meals available.
+2. Census child population estimates:
+   - Source: U.S. Census API (most recent ACS 5-year release available at runtime).
+   - Geography target: Census tracts (or block groups if feasible) in San Francisco County (`FIPS 075`).
+   - API key policy: key is optional for low-volume use; required above 500 queries/IP/day.
+3. Spatial geometry:
+   - Source: TIGER/Line tract geometries (or Census cartographic boundary files).
+4. Geocoding for supply nodes:
+   - Source: U.S. Census Geocoder API (`Public_AR_Current` benchmark).
+   - API key: not required for this workflow.
+
+## 3. Data Engineering Plan
+
+### 3.1 Meal-site extraction
+
+1. Attempt automated extraction from the SF.gov page table.
+2. If blocked by JS/challenge, use a manual CSV fallback:
+   - `data/raw/meal_sites_manual.csv`
+3. Standardize columns:
+   - `site_id, site_name, address, day, meals_available, meal_type`
+4. Geocode addresses to lat/lon and QA bad matches.
+
+### 3.2 Census pull for `age < 18`
+
+1. Use ACS sex-by-age table (`B01001`) and sum all under-18 bins.
+2. Pull all SF tracts from API and build:
+   - `tract_geoid`
+   - `child_pop_u18`
+3. Join to tract geometry and compute tract centroids for transport costs.
+4. Implementation:
+   - `scripts/fetch_census_children.py`
+   - output: `data/processed/tract_child_population.csv`
+
+### 3.3 Demand calibration
+
+1. Convert `child_pop_u18` to expected daily meal demand:
+   - `demand_i = child_pop_u18_i * participation_rate`
+2. Start with citywide participation-rate scenario grid (e.g., `0.2, 0.3, 0.4`) and refine later.
+3. Implementation:
+   - `scripts/build_tract_day_demand.py`
+   - output: `data/processed/tract_day_demand.csv`
+
+### 3.4 Spatial inputs for LP
+
+1. Geocode meal-site addresses to point coordinates:
+   - `scripts/geocode_supply_sites.py`
+   - output: `data/processed/site_locations.csv`
+2. Build SF tract centroids from TIGER polygons with GeoPandas:
+   - `scripts/build_tract_centroids.py`
+   - output: `data/processed/tract_centroids.csv`
+3. Build tract-to-site cost matrix (`c_{i,j}`) using haversine distance (miles):
+   - `scripts/build_tract_site_cost_matrix.py`
+   - output: `data/processed/tract_site_cost_matrix.csv`
+
+## 4. Optimization Formulation (LP)
+
+Let:
+
+- `i` = demand node (tract)
+- `j` = supply node (meal site)
+- `d in {Mon, Tue}` = strike day (`2026-02-09`, `2026-02-10`)
+- `x_{i,j,d} >= 0` = meals allocated from site `j` to tract `i` on day `d`
+- `u_{i,d} >= 0` = unmet demand for tract `i` on day `d`
+- `c_{i,j}` = transport/access cost (distance or travel time)
+
+Objective:
+
+- Solve a static two-day plan in one LP; minimize total weighted transport cost + unmet demand penalty:
+  - `min sum_{i,j,d} c_{i,j} * x_{i,j,d} + lambda * sum_{i,d} u_{i,d}`
+
+Constraints:
+
+1. Site capacity by day:
+   - `sum_i x_{i,j,d} <= supply_{j,d}`
+2. Demand balance by tract-day:
+   - `sum_j x_{i,j,d} + u_{i,d} = demand_{i,d}`
+3. Non-negativity:
+   - `x_{i,j,d}, u_{i,d} >= 0`
+4. Optional policy constraints (if needed):
+   - max service radius
+   - equity floor by neighborhood
+   - site utilization minimums
+
+Modeling note:
+
+- This is a **single static optimization across both days** (not a rolling/day-by-day re-solve).
+- Comparison run includes two variants:
+  - `status_quo`: site-day meals fixed to listed capacities.
+  - `optimal_reallocation`: day-total meals conserved, but reallocated across open sites with per-site cap multiplier.
+
+## 5. Implementation Steps
+
+1. Create folders and schemas:
+   - `data/raw`, `data/processed`, `outputs`, `notebooks`
+2. Build ingestion scripts:
+   - `scripts/fetch_meal_sites.py`
+   - `scripts/fetch_census_children.py`
+3. Build optimization script:
+   - `scripts/solve_allocation_lp.py`
+4. Persist outputs:
+   - tract-level demand table
+   - site-day allocations (`status_quo` vs `optimal_reallocation`)
+   - unmet-demand report
+   - map-ready GeoJSON/CSV
+5. Add scenario runner:
+   - participation-rate and penalty (`lambda`) sensitivity runs.
+
+## 6. QA and Validation
+
+1. Data QA:
+   - no missing geocodes for active sites
+   - positive supplies and demands
+   - day labels normalized
+2. Model QA:
+   - capacity constraints never violated
+   - total allocated + unmet equals total demand
+   - expected behavior under extreme `lambda` values
+3. Face-validity checks:
+   - high-demand tracts receive higher allocations
+   - long-distance assignments decrease when radius caps are used
+
+## 7. Deliverables
+
+1. Reproducible Quarto report with methods, assumptions, and results.
+2. Daily allocation tables by site and tract.
+3. Map of demand, supply, and modeled service flows.
+4. Sensitivity appendix (participation-rate and penalty scenarios).
+
+## 8. Open Decisions to Resolve Next
+
+1. Demand-node resolution:
+   - tract vs block group.
+2. Cost metric:
+   - straight-line distance vs travel time.
+3. Equity policy:
+   - whether to enforce neighborhood minimum coverage.
+4. Meal handling:
+   - single pooled meal model vs separate breakfast/lunch constraints.
+
+## 9. Step-by-Step Execution Log (To Fill In)
+
+- [x] Confirm strike-day scope for modeling: Monday 2026-02-09 and Tuesday 2026-02-10.
+- [x] Create raw meal-site table from PDF export: `data/raw/meal_sites_manual.csv`.
+- [x] Build LP-ready supply table: `data/processed/site_day_supply.csv`.
+- [x] Pull ACS child population: `data/processed/tract_child_population.csv` (ACS 2024, 244 tracts).
+- [x] Build tract demand table: `data/processed/tract_day_demand.csv` (2 days, scenarios `0.2/0.3/0.4`, lunch baseline).
+- [x] Build tract centroids and geocode sites; create `c_{i,j}` matrix (`data/processed/tract_site_cost_matrix.csv`).
+- [x] Run baseline LP comparison (`scripts/solve_allocation_lp.py`, `lambda=100`, cap multiplier `2.0`).
+- [ ] Finalize policy constraints (e.g., fairness floors, service radius, reallocation cap sensitivity).
+- [ ] Run sensitivity scenarios.
+- [x] Produce initial comparison figure: `outputs/figures/status_quo_vs_optimal_allocations.png`.
+- [ ] Produce final plots/tables/maps.

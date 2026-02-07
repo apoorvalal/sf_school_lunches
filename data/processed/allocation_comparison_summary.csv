@@ -1,0 +1,4 @@
+scenario_id,participation_rate,meal_type,model_status_quo_served,model_optimal_served,total_demand,total_supply,status_quo_unmet,optimal_unmet,status_quo_coverage_rate,optimal_coverage_rate,status_quo_avg_distance_miles,optimal_avg_distance_miles,total_l1_reallocation,implied_meals_moved,unmet_penalty,reallocation_cap_multiplier
+pr_0p2,0.2,lunch,3715.0,3715.0,45403.2,3715.0,41688.2,41688.2,0.081822,0.081822,0.157873,0.107547,2373.6,1186.8,100.0,2.0
+pr_0p3,0.3,lunch,3715.0,3715.0,68104.8,3715.0,64389.8,64389.8,0.054548,0.054548,0.142258,0.094259,2730.0,1365.0,100.0,2.0
+pr_0p4,0.4,lunch,3715.0,3715.0,90806.4,3715.0,87091.4,87091.4,0.040911,0.040911,0.139696,0.08751,3271.2,1635.6,100.0,2.0

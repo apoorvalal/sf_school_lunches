@@ -1,0 +1,121 @@
+---
+title: "SF Strike Meals Allocation: Final Report"
+format:
+  html:
+    number-sections: true
+    embed-resources: true
+    page-layout: full
+execute:
+  echo: false
+---
+
+## 1. Problem Statement
+
+During the SFUSD strike window (Monday, February 9, 2026 and Tuesday, February 10, 2026), community organizations distributed packed meals at fixed locations across San Francisco. The planning question is how to allocate limited meals across sites to better match tract-level child demand (`age < 18`) derived from the most recent Census ACS release.
+
+This report compares:
+
+- `status_quo`: site-day capacities as listed.
+- `optimal_reallocation`: same day-total supply, reallocated across open sites using a linear program.
+
+## 2. Problem Formulation
+
+{{< include report_sections/problem_formulation_nested.qmd >}}
+
+## 3. Empirics
+
+{{< include report_sections/empirics_nested.qmd >}}
+
+## 4. Results
+
+### 4.1 Scenario Summary
+
+| Scenario | Participation Rate | Served (Status Quo) | Served (Optimal) | Coverage (Status Quo) | Coverage (Optimal) | Avg Distance Miles (Status Quo) | Avg Distance Miles (Optimal) | Implied Meals Moved |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| `pr_0p2` | 0.2 | 3715.0 | 3715.0 | 0.081822 | 0.081822 | 0.157873 | 0.107547 | 1186.8 |
+| `pr_0p3` | 0.3 | 3715.0 | 3715.0 | 0.054548 | 0.054548 | 0.142258 | 0.094259 | 1365.0 |
+| `pr_0p4` | 0.4 | 3715.0 | 3715.0 | 0.040911 | 0.040911 | 0.139696 | 0.087510 | 1635.6 |
+
+Coverage remains fixed (total supply is fixed), while optimized reallocation lowers average distance and shifts a substantial number of meals across sites.
+
+### 4.2 Status Quo vs Optimal (Site-Day Scatter)
+
+![](outputs/figures/status_quo_vs_optimal_allocations.png)
+
+### 4.3 Site-Level Facet Grid (8 x 5)
+
+Facet titles are `site name + address`. Each panel aggregates each site's **two-day total lunches** by participation rate and compares status quo vs optimal allocations.
+
+![](outputs/figures/site_allocation_facets_8x5.png)
+
+## 5. Work Log And Directory Structure
+
+### 5.1 Distilled Work Log
+
+1. Ingested strike meal-site capacities from your SF.gov PDF export and built:
+   - `data/raw/meal_sites_manual.csv`
+   - `data/processed/site_day_supply.csv`
+2. Pulled SF tract child population (`age < 18`) from Census ACS API and built:
+   - `data/processed/tract_child_population.csv`
+   - `data/processed/tract_day_demand.csv`
+3. Built spatial model inputs:
+   - geocoded sites via Census geocoder to `data/processed/site_locations.csv`
+   - tract centroids via GeoPandas/TIGER to `data/processed/tract_centroids.csv`
+   - tract-site distance matrix to `data/processed/tract_site_cost_matrix.csv`
+4. Solved and compared allocation models:
+   - `data/processed/allocation_comparison_summary.csv`
+   - `data/processed/site_day_allocation_comparison.csv`
+5. Produced reporting visuals:
+   - `outputs/figures/status_quo_vs_optimal_allocations.png`
+   - `outputs/figures/site_allocation_facets_8x5.png`
+
+### 5.2 Key Scripts
+
+- `scripts/extract_meal_sites_from_pdf.py`
+- `scripts/build_site_day_supply.py`
+- `scripts/fetch_census_children.py`
+- `scripts/build_tract_day_demand.py`
+- `scripts/geocode_supply_sites.py`
+- `scripts/build_tract_centroids.py`
+- `scripts/build_tract_site_cost_matrix.py`
+- `scripts/solve_allocation_lp.py`
+- `scripts/plot_site_facets.py`
+
+### 5.3 Data Sources
+
+- SF meal-site listing (PDF export from SF.gov strike meals page)
+- U.S. Census ACS 5-year API (`B01001` age bins)
+- U.S. Census TIGER tract polygons (California, 2024)
+- U.S. Census Geocoder API (`Public_AR_Current`)
+
+### 5.4 Directory Snapshot
+
+```text
+data/
+  raw/
+    meal_sites_source.txt
+    meal_sites_manual.csv
+  processed/
+    site_day_supply.csv
+    site_locations.csv
+    tract_child_population.csv
+    tract_day_demand.csv
+    tract_centroids.csv
+    tract_site_cost_matrix.csv
+    allocation_comparison_summary.csv
+    site_day_allocation_comparison.csv
+outputs/
+  figures/
+    status_quo_vs_optimal_allocations.png
+    site_allocation_facets_8x5.png
+scripts/
+  extract_meal_sites_from_pdf.py
+  build_site_day_supply.py
+  fetch_census_children.py
+  build_tract_day_demand.py
+  geocode_supply_sites.py
+  build_tract_centroids.py
+  build_tract_site_cost_matrix.py
+  solve_allocation_lp.py
+  plot_site_facets.py
+```

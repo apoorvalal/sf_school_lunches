@@ -1,0 +1,78 @@
+site_id,site_name,address,distribution_date,day,start_time,end_time,meal_type,meals_available,notes
+001_826-valencia-main,826 Valencia - Main,826 Valencia Street,2026-02-10,Tuesday,12:00,12:30,lunch,30,
+002_826-valencia-mission-bay,826 Valencia - Mission Bay,1310 4th Street,2026-02-10,Tuesday,12:00,12:30,lunch,30,
+003_826-valencia-tenderloin,826 Valencia - Tenderloin,180 Golden Gate Avenue,2026-02-10,Tuesday,12:00,12:30,lunch,30,
+004_bayview-ymca,Bayview YMCA,1601 Lane Street,2026-02-09,Monday,11:45,13:00,breakfast,50,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+004_bayview-ymca,Bayview YMCA,1601 Lane Street,2026-02-09,Monday,11:45,13:00,lunch,50,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+004_bayview-ymca,Bayview YMCA,1601 Lane Street,2026-02-10,Tuesday,11:45,13:00,lunch,50,
+005_bernal-heights-library,Bernal Heights Library,500 Cortland Avenue,2026-02-10,Tuesday,12:00,13:00,lunch,20,
+006_betty-an-ong-recreation-center,Betty An Ong Recreation Center,1199 Mason Street,2026-02-10,Tuesday,12:00,13:00,lunch,30,
+007_boys-and-girls-clubs-of-sf-excelsior-clubhouse,Boys and Girls Clubs of SF - Excelsior Clubhouse,163 London Street,2026-02-09,Monday,12:00,13:00,lunch,30,
+007_boys-and-girls-clubs-of-sf-excelsior-clubhouse,Boys and Girls Clubs of SF - Excelsior Clubhouse,163 London Street,2026-02-10,Tuesday,12:00,13:00,lunch,30,
+008_buena-vista-child-care,Buena Vista Child Care,1249 Alabama Street,2026-02-10,Tuesday,12:00,13:00,lunch,40,
+009_community-youth-center-chinatown,Community Youth Center - Chinatown,830 Sacramento,2026-02-09,Monday,12:00,13:30,lunch,100,
+009_community-youth-center-chinatown,Community Youth Center - Chinatown,830 Sacramento,2026-02-10,Tuesday,12:00,13:30,lunch,100,
+010_community-youth-center-richmond,Community Youth Center - Richmond,980 Clement Street,2026-02-09,Monday,12:00,13:30,lunch,150,
+010_community-youth-center-richmond,Community Youth Center - Richmond,980 Clement Street,2026-02-10,Tuesday,12:00,13:30,lunch,100,
+011_community-youth-center-tenderloin,Community Youth Center - Tenderloin,1038 Post Street,2026-02-09,Monday,12:00,13:30,lunch,50,
+011_community-youth-center-tenderloin,Community Youth Center - Tenderloin,1038 Post Street,2026-02-10,Tuesday,12:00,13:30,lunch,50,
+012_faces-sf,FACES SF,100 Whitney Young Circle,2026-02-09,Monday,12:00,13:00,lunch,100,
+012_faces-sf,FACES SF,100 Whitney Young Circle,2026-02-10,Tuesday,12:00,13:00,lunch,100,
+013_gilman-playground,Gilman Playground,903 Gilman Avenue,2026-02-09,Monday,12:00,13:00,breakfast,45,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+013_gilman-playground,Gilman Playground,903 Gilman Avenue,2026-02-09,Monday,12:00,13:00,lunch,45,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+013_gilman-playground,Gilman Playground,903 Gilman Avenue,2026-02-10,Tuesday,12:00,13:00,lunch,45,
+014_hamilton-recreation-center,Hamilton Recreation Center,1900 Geary Boulevard,2026-02-09,Monday,12:00,13:00,breakfast,20,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+014_hamilton-recreation-center,Hamilton Recreation Center,1900 Geary Boulevard,2026-02-09,Monday,12:00,13:00,lunch,20,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+014_hamilton-recreation-center,Hamilton Recreation Center,1900 Geary Boulevard,2026-02-10,Tuesday,12:00,13:00,lunch,20,
+015_ingleside-library,Ingleside Library,1298 Ocean Avenue,2026-02-10,Tuesday,12:00,13:00,lunch,20,
+016_joseph-lee-recreation-center,Joseph Lee Recreation Center,1395 Mendell Street,2026-02-09,Monday,14:30,15:30,breakfast,40,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+016_joseph-lee-recreation-center,Joseph Lee Recreation Center,1395 Mendell Street,2026-02-09,Monday,14:30,15:30,lunch,40,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+016_joseph-lee-recreation-center,Joseph Lee Recreation Center,1395 Mendell Street,2026-02-10,Tuesday,14:30,15:30,lunch,40,
+017_main-library,Main Library,100 Larkin Street,2026-02-10,Tuesday,12:00,13:00,lunch,20,
+018_minnie-and-lovie-ward-recreation-center,Minnie and Lovie Ward Recreation Center,650 Capitol Avenue,2026-02-10,Tuesday,12:00,13:00,lunch,30,
+019_mission-graduates,Mission Graduates,3040 16th Street,2026-02-09,Monday,12:00,13:00,breakfast,100,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+019_mission-graduates,Mission Graduates,3040 16th Street,2026-02-09,Monday,12:00,13:00,lunch,100,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+019_mission-graduates,Mission Graduates,3040 16th Street,2026-02-10,Tuesday,12:00,13:00,lunch,100,
+020_mission-language-and-vocational-school-excelsior,Mission Language and Vocational School - Excelsior,4834 Mission Street,2026-02-10,Tuesday,12:00,13:00,lunch,100,
+021_mission-language-and-vocational-school-main,Mission Language and Vocational School - Main,2929 19th Street,2026-02-09,Monday,12:00,13:00,breakfast,100,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+021_mission-language-and-vocational-school-main,Mission Language and Vocational School - Main,2929 19th Street,2026-02-09,Monday,12:00,13:00,lunch,150,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+021_mission-language-and-vocational-school-main,Mission Language and Vocational School - Main,2929 19th Street,2026-02-10,Tuesday,12:00,13:00,lunch,150,
+022_palega-recreation-center,Palega Recreation Center,500 Felton Street,2026-02-10,Tuesday,12:00,13:00,lunch,30,
+023_pomeroy-recreation-rehabilitation-center,Pomeroy Recreation & Rehabilitation Center,207 Skyline Boulevard,2026-02-09,Monday,12:00,13:00,breakfast,20,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+023_pomeroy-recreation-rehabilitation-center,Pomeroy Recreation & Rehabilitation Center,207 Skyline Boulevard,2026-02-09,Monday,12:00,13:00,lunch,20,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+023_pomeroy-recreation-rehabilitation-center,Pomeroy Recreation & Rehabilitation Center,207 Skyline Boulevard,2026-02-10,Tuesday,12:00,13:00,lunch,50,
+024_potrero-library,Potrero Library,1616 20th Street,2026-02-10,Tuesday,12:00,13:00,lunch,20,
+025_portola-library,Portola Library,380 Bacon Street,2026-02-10,Tuesday,12:00,13:00,lunch,40,
+026_r-o-c-k,R.O.C.K,1533 Sunnydale,2026-02-09,Monday,12:00,13:00,breakfast,40,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+026_r-o-c-k,R.O.C.K,1533 Sunnydale,2026-02-09,Monday,12:00,13:00,lunch,40,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+026_r-o-c-k,R.O.C.K,1533 Sunnydale,2026-02-10,Tuesday,12:00,13:00,lunch,30,
+027_samoan-community-development-center,Samoan Community Development Center,2055 Sunnydale Avenue,2026-02-09,Monday,12:00,13:00,breakfast,30,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+027_samoan-community-development-center,Samoan Community Development Center,2055 Sunnydale Avenue,2026-02-09,Monday,12:00,13:00,lunch,30,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+027_samoan-community-development-center,Samoan Community Development Center,2055 Sunnydale Avenue,2026-02-10,Tuesday,12:00,13:00,lunch,30,
+028_st-mary-s-recreation-center,St. Mary's Recreation Center,95 Justin Drive,2026-02-10,Tuesday,12:00,13:00,lunch,30,
+029_sunset-recreation-center,Sunset Recreation Center,2201 Lawton Street,2026-02-10,Tuesday,12:00,13:00,lunch,30,
+030_tel-hi-neighborhood-center-site-1,TEL HI Neighborhood Center - Site 1,555 Chestnut Street,2026-02-09,Monday,12:00,12:45,breakfast,90,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+030_tel-hi-neighborhood-center-site-1,TEL HI Neighborhood Center - Site 1,555 Chestnut Street,2026-02-09,Monday,12:00,12:45,lunch,90,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+030_tel-hi-neighborhood-center-site-1,TEL HI Neighborhood Center - Site 1,555 Chestnut Street,2026-02-10,Tuesday,12:00,12:45,lunch,90,
+031_tel-hi-neighborhood-center-site-2,TEL HI Neighborhood Center - Site 2,567 Bay Street,2026-02-09,Monday,12:30,13:00,breakfast,50,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+031_tel-hi-neighborhood-center-site-2,TEL HI Neighborhood Center - Site 2,567 Bay Street,2026-02-09,Monday,12:30,13:00,lunch,50,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+031_tel-hi-neighborhood-center-site-2,TEL HI Neighborhood Center - Site 2,567 Bay Street,2026-02-10,Tuesday,12:30,13:00,lunch,50,
+032_tel-hi-neighborhood-center-site-3,TEL HI Neighborhood Center - Site 3,660 Lombard Street,2026-02-09,Monday,12:00,13:00,lunch,75,
+032_tel-hi-neighborhood-center-site-3,TEL HI Neighborhood Center - Site 3,660 Lombard Street,2026-02-10,Tuesday,12:00,13:00,lunch,75,
+033_the-marsh,The Marsh,1070 Valencia Street,2026-02-09,Monday,13:00,14:00,breakfast,80,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+033_the-marsh,The Marsh,1070 Valencia Street,2026-02-09,Monday,13:00,14:00,lunch,80,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+033_the-marsh,The Marsh,1070 Valencia Street,2026-02-10,Tuesday,11:30,13:30,lunch,80,
+034_the-richmond-neighborhood-center,The Richmond Neighborhood Center,741 30th Avenue,2026-02-09,Monday,11:30,13:30,lunch,150,
+034_the-richmond-neighborhood-center,The Richmond Neighborhood Center,741 30th Avenue,2026-02-10,Tuesday,11:30,13:30,lunch,150,
+035_up-on-top,UP ON TOP,570 Ellis Street,2026-02-09,Monday,11:30,13:30,breakfast,50,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+035_up-on-top,UP ON TOP,570 Ellis Street,2026-02-09,Monday,11:30,13:30,lunch,75,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+035_up-on-top,UP ON TOP,570 Ellis Street,2026-02-10,Tuesday,11:30,13:30,lunch,75,
+036_vision-academy-bayview,Vision Academy - Bayview,1311 Quesada,2026-02-10,Tuesday,12:00,13:00,lunch,60,
+037_visitacion-valley-library,Visitacion Valley Library,201 Leland Avenue,2026-02-10,Tuesday,12:00,13:00,lunch,30,
+038_youth-1st,Youth 1st,801 Shields Street,2026-02-09,Monday,12:00,12:30,breakfast,50,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+038_youth-1st,Youth 1st,801 Shields Street,2026-02-09,Monday,12:00,12:30,lunch,50,Families can pick up lunch for Monday and breakfast for Tuesday morning at the same time.
+038_youth-1st,Youth 1st,801 Shields Street,2026-02-10,Tuesday,12:00,12:30,lunch,50,
+039_youth-art-exchange-site-1,Youth Art Exchange - Site 1,1950 Mission Street,2026-02-09,Monday,12:00,13:00,lunch,50,
+039_youth-art-exchange-site-1,Youth Art Exchange - Site 1,1950 Mission Street,2026-02-10,Tuesday,12:00,13:00,lunch,35,
+040_youth-art-exchange-site-2,Youth Art Exchange - Site 2,400 Geneva Avenue,2026-02-09,Monday,12:00,13:00,lunch,50,
+040_youth-art-exchange-site-2,Youth Art Exchange - Site 2,400 Geneva Avenue,2026-02-10,Tuesday,12:00,13:00,lunch,30,
