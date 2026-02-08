@@ -31,9 +31,11 @@ for the SF strike days `2026-02-09` and `2026-02-10`, using tract-level child po
 uv sync
 ```
 
-2. Put the PDF export in `data/` (current filename used below):
+2.  Verify input data 
 
 `data/Free meals for youth under age 18 during UESF strike _ SF.gov.pdf`
+
+pdf export of [this sfgov page](https://www.sf.gov/departments--children-youth-and-their-families/free-youth-meals-sfusd-school-strike). 
 
 3. Run the pipeline:
 
