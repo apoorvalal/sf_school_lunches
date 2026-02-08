@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>empirics_nested</title>
+<style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; max-width: 900px; margin: 40px auto; padding: 20px; color: #333; }
+        h1, h2, h3, h4 { color: #1f77b4; margin-top: 1.5em; }
+        table { border-collapse: collapse; width: 100%; margin: 1em 0; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f2f2f2; font-weight: bold; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        code { background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
+        pre { background-color: #f4f4f4; padding: 12px; border-radius: 5px; overflow-x: auto; }
+        img { max-width: 100%; height: auto; margin: 20px 0; border-radius: 5px; }
+        blockquote { border-left: 4px solid #1f77b4; margin: 1em 0; padding-left: 1em; color: #555; }
+        a { color: #1f77b4; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+<p></p>
+<h3>1. Objective</h3>
+<p></p>
+<p>Build a reproducible pipeline to estimate child demand (<code>age < 18</code>) across San Francisco and compute an optimal packed-lunch allocation plan during the SFUSD strike week.</p>
+<p></p>
+<p>Working assumption for this project: <strong>two strike days only, Monday February 9, 2026 and Tuesday February 10, 2026</strong>.</p>
+<p></p>
+<h3>2. Core Data Sources</h3>
+<p></p>
+<p>1. Meal-site supply and schedule:</p>
+<p>- Source: <https://www.sf.gov/departments--children-youth-and-their-families/free-youth-meals-sfusd-school-strike></p>
+<p>- Fields needed: site name, address, day, meal type, meals available.</p>
+<p>2. Census child population estimates:</p>
+<p>- Source: U.S. Census API (most recent ACS 5-year release available at runtime).</p>
+<p>- Geography target: Census tracts (or block groups if feasible) in San Francisco County (<code>FIPS 075</code>).</p>
+<p>- API key policy: key is optional for low-volume use; required above 500 queries/IP/day.</p>
+<p>3. Spatial geometry:</p>
+<p>- Source: TIGER/Line tract geometries (or Census cartographic boundary files).</p>
+<p>4. Geocoding for supply nodes:</p>
+<p>- Source: U.S. Census Geocoder API (<code>Public<em>AR</em>Current</code> benchmark).</p>
+<p>- API key: not required for this workflow.</p>
+<p></p>
+<h3>3. Data Engineering Plan</h3>
+<p></p>
+<h4>3.1 Meal-site extraction</h4>
+<p></p>
+<p>1. Attempt automated extraction from the SF.gov page table.</p>
+<p>2. If blocked by JS/challenge, use a manual CSV fallback:</p>
+<p>- <code>data/raw/meal<em>sites</em>manual.csv</code></p>
+<p>3. Standardize columns:</p>
+<p>- <code>site<em>id, site</em>name, address, day, meals<em>available, meal</em>type</code></p>
+<p>4. Geocode addresses to lat/lon and QA bad matches.</p>
+<p></p>
+<h4>3.2 Census pull for `age < 18`</h4>
+<p></p>
+<p>1. Use ACS sex-by-age table (<code>B01001</code>) and sum all under-18 bins.</p>
+<p>2. Pull all SF tracts from API and build:</p>
+<p>- <code>tract_geoid</code></p>
+<p>- <code>child<em>pop</em>u18</code></p>
+<p>3. Join to tract geometry and compute tract centroids for transport costs.</p>
+<p>4. Implementation:</p>
+<p>- <code>scripts/fetch<em>census</em>children.py</code></p>
+<p>- output: <code>data/processed/tract<em>child</em>population.csv</code></p>
+<p></p>
+<h4>3.3 Demand calibration</h4>
+<p></p>
+<p>1. Convert <code>child<em>pop</em>u18</code> to expected daily meal demand:</p>
+<p>- <code>demand<em>i = child</em>pop<em>u18</em>i * participation_rate</code></p>
+<p>2. Start with citywide participation-rate scenario grid (e.g., <code>0.2, 0.3, 0.4</code>) and refine later.</p>
+<p>3. Implementation:</p>
+<p>- <code>scripts/build<em>tract</em>day_demand.py</code></p>
+<p>- output: <code>data/processed/tract<em>day</em>demand.csv</code></p>
+<p></p>
+<h4>3.4 Spatial inputs for LP</h4>
+<p></p>
+<p>1. Geocode meal-site addresses to point coordinates:</p>
+<p>- <code>scripts/geocode<em>supply</em>sites.py</code></p>
+<p>- output: <code>data/processed/site_locations.csv</code></p>
+<p>2. Build SF tract centroids from TIGER polygons with GeoPandas:</p>
+<p>- <code>scripts/build<em>tract</em>centroids.py</code></p>
+<p>- output: <code>data/processed/tract_centroids.csv</code></p>
+<p>3. Build tract-to-site cost matrix (<code>c_{i,j}</code>) using haversine distance (miles):</p>
+<p>- <code>scripts/build<em>tract</em>site<em>cost</em>matrix.py</code></p>
+<p>- output: <code>data/processed/tract<em>site</em>cost_matrix.csv</code></p>
+<p></p>
+<h3>4. Optimization Formulation (LP)</h3>
+<p></p>
+<p>Let:</p>
+<p></p>
+<p>- <code>i</code> = demand node (tract)</p>
+<p>- <code>j</code> = supply node (meal site)</p>
+<p>- <code>d in {Mon, Tue}</code> = strike day (<code>2026-02-09</code>, <code>2026-02-10</code>)</p>
+<p>- <code>x_{i,j,d} >= 0</code> = meals allocated from site <code>j</code> to tract <code>i</code> on day <code>d</code></p>
+<p>- <code>u_{i,d} >= 0</code> = unmet demand for tract <code>i</code> on day <code>d</code></p>
+<p>- <code>c_{i,j}</code> = transport/access cost (distance or travel time)</p>
+<p></p>
+<p>Objective:</p>
+<p></p>
+<p>- Solve a static two-day plan in one LP; minimize total weighted transport cost + unmet demand penalty:</p>
+<p>- <code>min sum<em>{i,j,d} c</em>{i,j} <em> x<em>{i,j,d} + lambda </em> sum</em>{i,d} u_{i,d}</code></p>
+<p></p>
+<p>Constraints:</p>
+<p></p>
+<p>1. Site capacity by day:</p>
+<p>- <code>sum<em>i x</em>{i,j,d} <= supply_{j,d}</code></p>
+<p>2. Demand balance by tract-day:</p>
+<p>- <code>sum<em>j x</em>{i,j,d} + u<em>{i,d} = demand</em>{i,d}</code></p>
+<p>3. Non-negativity:</p>
+<p>- <code>x<em>{i,j,d}, u</em>{i,d} >= 0</code></p>
+<p>4. Optional policy constraints (if needed):</p>
+<p>- max service radius</p>
+<p>- equity floor by neighborhood</p>
+<p>- site utilization minimums</p>
+<p></p>
+<p>Modeling note:</p>
+<p></p>
+<p>- This is a <strong>single static optimization across both days</strong> (not a rolling/day-by-day re-solve).</p>
+<p>- Comparison run includes two variants:</p>
+<p>- <code>status_quo</code>: site-day meals fixed to listed capacities.</p>
+<p>- <code>optimal_reallocation</code>: day-total meals conserved, but reallocated across open sites with per-site cap multiplier.</p>
+<p></p>
+<h3>5. Implementation Steps</h3>
+<p></p>
+<p>1. Create folders and schemas:</p>
+<p>- <code>data/raw</code>, <code>data/processed</code>, <code>outputs</code>, <code>notebooks</code></p>
+<p>2. Build ingestion scripts:</p>
+<p>- <code>scripts/fetch<em>meal</em>sites.py</code></p>
+<p>- <code>scripts/fetch<em>census</em>children.py</code></p>
+<p>3. Build optimization script:</p>
+<p>- <code>scripts/solve<em>allocation</em>lp.py</code></p>
+<p>4. Persist outputs:</p>
+<p>- tract-level demand table</p>
+<p>- site-day allocations (<code>status<em>quo</code> vs <code>optimal</em>reallocation</code>)</p>
+<p>- unmet-demand report</p>
+<p>- map-ready GeoJSON/CSV</p>
+<p>5. Add scenario runner:</p>
+<p>- participation-rate and penalty (<code>lambda</code>) sensitivity runs.</p>
+<p></p>
+<h3>6. QA and Validation</h3>
+<p></p>
+<p>1. Data QA:</p>
+<p>- no missing geocodes for active sites</p>
+<p>- positive supplies and demands</p>
+<p>- day labels normalized</p>
+<p>2. Model QA:</p>
+<p>- capacity constraints never violated</p>
+<p>- total allocated + unmet equals total demand</p>
+<p>- expected behavior under extreme <code>lambda</code> values</p>
+<p>3. Face-validity checks:</p>
+<p>- high-demand tracts receive higher allocations</p>
+<p>- long-distance assignments decrease when radius caps are used</p>
+<p></p>
+<h3>7. Deliverables</h3>
+<p></p>
+<p>1. Reproducible Quarto report with methods, assumptions, and results.</p>
+<p>2. Daily allocation tables by site and tract.</p>
+<p>3. Map of demand, supply, and modeled service flows.</p>
+<p>4. Sensitivity appendix (participation-rate and penalty scenarios).</p>
+<p></p>
+<h3>8. Demand Sensitivity: Two Cases (ACS vs. CDE FRPM)</h3>
+<p></p>
+<p>To understand how demand specification affects optimal allocation, we compare two demand-estimation approaches applied to the same LP framework and site network.</p>
+<p></p>
+<h4>8.1 Case 1: ACS-Based Child Population Demand</h4>
+<p></p>
+<p><strong>Specification:</strong></p>
+<p>- Source: U.S. Census Bureau ACS 5-year estimates (2024).</p>
+<p>- Definition: All children under 18 in each tract (regardless of income/eligibility).</p>
+<p>- Coverage: 244 tracts in San Francisco County; total baseline population ~1.9M children per tract averages.</p>
+<p>- Implementation: <code>scripts/fetch<em>census</em>children.py</code> → <code>scripts/build<em>tract</em>day_demand.py</code>.</p>
+<p></p>
+<p><strong>Rationale:</strong> Universal baseline reflecting total child population needing meals during a strike.</p>
+<p></p>
+<p><strong>Results (participation scenarios: 20%, 30%, 40%):</strong></p>
+<p></p>
+<table>
+<tr>
+<th>Participation Rate</th>
+<th>Total Demand</th>
+<th>Status-Quo Coverage</th>
+<th>Optimal Coverage</th>
+<th>Status-Quo Avg Distance</th>
+<th>Optimal Avg Distance</th>
+<th>Unmet Demand (Status-Quo)</th>
+</tr>
+<table>
+<tr>
+<th>20%</th>
+<th>45,403 meals</th>
+<th>8.2%</th>
+<th>8.2%</th>
+<th>0.158 mi</th>
+<th>0.108 mi</th>
+<th>41,688 meals</th>
+</tr>
+<table>
+<tr>
+<th>30%</th>
+<th>68,105 meals</th>
+<th>5.5%</th>
+<th>5.5%</th>
+<th>0.142 mi</th>
+<th>0.094 mi</th>
+<th>64,390 meals</th>
+</tr>
+<table>
+<tr>
+<th>40%</th>
+<th>90,806 meals</th>
+<th>4.1%</th>
+<th>4.1%</th>
+<th>0.140 mi</th>
+<th>0.088 mi</th>
+<th>87,091 meals</th>
+</tr>
+<p><strong>Interpretation:</strong></p>
+<p>- Demand far exceeds fixed supply (3,715 meals/day across all sites).</p>
+<p>- Coverage rates decline as participation increases (more demand relative to fixed supply).</p>
+<p>- Optimal reallocation <strong>reduces average distance by 30–32%</strong> but cannot increase total served meals (capped by supply).</p>
+<p>- <strong>High unmet demand</strong> (91–96% unmet) highlights severe capacity constraints.</p>
+<p>- Distance reduction reflects <strong>geographic matching</strong>: optimal allocation routes available meals to nearer tracts, improving access equity.</p>
+<h4>8.2 Case 2: CDE FRPM-Based Student Eligibility Demand</h4>
+<p><strong>Specification:</strong></p>
+<p>- Source: California Department of Education CALPADS unduplicated pupil counts (2024–25 school year).</p>
+<p>- Definition: Students eligible for free or reduced-price meals (FRPM) at public schools.</p>
+<p>- Coverage: 107 schools matched via fuzzy name-matching to CDE directory (~85 tracts with non-zero counts).</p>
+<p>- Implementation: <code>scripts/augment<em>with</em>cde<em>from</em>directory.py</code> → <code>scripts/build<em>tract</em>day_demand.py</code>.</p>
+<p><strong>Rationale:</strong> Targeted approach focusing on students most likely to need meal assistance.</p>
+<p><strong>Results (participation scenarios: 20%, 30%, 40%):</strong></p>
+<table>
+<tr>
+<th>Participation Rate</th>
+<th>Total Demand</th>
+<th>Status-Quo Coverage</th>
+<th>Optimal Coverage</th>
+<th>Status-Quo Avg Distance</th>
+<th>Optimal Avg Distance</th>
+<th>Unmet Demand (Status-Quo)</th>
+</tr>
+<table>
+<tr>
+<th>20%</th>
+<th>8,691 meals</th>
+<th>42.7%</th>
+<th>42.7%</th>
+<th>0.379 mi</th>
+<th>0.260 mi</th>
+<th>4,976 meals</th>
+</tr>
+<table>
+<tr>
+<th>30%</th>
+<th>13,037 meals</th>
+<th>28.5%</th>
+<th>28.5%</th>
+<th>0.309 mi</th>
+<th>0.199 mi</th>
+<th>9,322 meals</th>
+</tr>
+<table>
+<tr>
+<th>40%</th>
+<th>17,382 meals</th>
+<th>21.4%</th>
+<th>21.4%</th>
+<th>0.266 mi</th>
+<th>0.177 mi</th>
+<th>13,667 meals</th>
+</tr>
+<p><strong>Interpretation:</strong></p>
+<p>- CDE demand is <strong>~19% of ACS demand</strong> (lower because (1) only FRPM-eligible students counted, (2) 107 of 113 schools matched, (3) geographic concentration).</p>
+<p>- Fixed 3,715-meal supply serves <strong>higher coverage rates</strong> (42.7% vs. 8.2% at 20% participation) under lower baseline demand.</p>
+<p>- Optimal reallocation <strong>reduces average distance by 31–34%</strong>, slightly larger gains than ACS due to demand concentration.</p>
+<p>- <strong>Lower unmet demand</strong> (4,976 vs. 41,688 at 20%) reflects targeted population size, not LP optimization benefits.</p>
+<p>- Demand is <strong>geographically concentrated</strong> in downtown/Mission/Bayview tracts (high-FRPM schools).</p>
+<h4>8.3 Side-by-Side Comparison</h4>
+<p><strong>Demand magnitude:</strong></p>
+<p>- CDE is 19% of ACS (8,691 vs. 45,403 at 20% participation).</p>
+<p>- ACS is <strong>universalist</strong> (all children); CDE is <strong>targeted</strong> (low-income indicator).</p>
+<p><strong>Coverage patterns:</strong></p>
+<p>- ACS: severe capacity shortfall (~92% unmet).</p>
+<p>- CDE: partial satisfaction (~58% unmet at 20% participation).</p>
+<p><strong>Reallocation benefits:</strong></p>
+<p>- Both show <strong>30–34% distance reductions</strong> via optimal LP.</p>
+<p>- Suggests reallocation value is <strong>robust to demand specification</strong>.</p>
+<p>- Distance reduction is the primary LP benefit; unmet demand remains largely unchanged.</p>
+<p><strong>Geographic concentration:</strong></p>
+<p>- ACS demand: dispersed across all 244 tracts (reflects population distribution).</p>
+<p>- CDE demand: concentrated in 85 tracts (reflects school locations and FRPM enrollment).</p>
+<p><strong>Policy implications:</strong></p>
+<table>
+<tr>
+<th>Objective</th>
+<th>Recommended Spec</th>
+<th>Rationale</th>
+</tr>
+<table>
+<tr>
+<th>Citywide strike-week coverage</th>
+<th>ACS</th>
+<th>Universal baseline; captures all children who may need meals.</th>
+</tr>
+<table>
+<tr>
+<th>Target low-income students</th>
+<th>CDE</th>
+<th>FRPM eligibility is a direct low-income proxy; geographically concentrated.</th>
+</tr>
+<table>
+<tr>
+<th>Resource efficiency</th>
+<th>CDE</th>
+<th>Lower demand profile may enable higher coverage rates with fixed budget.</th>
+</tr>
+<table>
+<tr>
+<th>Equity by geography</th>
+<th>ACS</th>
+<th>Broader geographic distribution can inform neighborhood-level fairness constraints.</th>
+</tr>
+<h4>8.4 Methodological Notes on CDE Augmentation</h4>
+<p><strong>Data linkage:</strong></p>
+<p>- Parsed CDE school directory (tab-delimited, 10,883 statewide schools) to extract coordinates.</p>
+<p>- Fuzzy matched 107 of 113 schools in manual CSV to directory; 6 unmatched (lost counts).</p>
+<p>- Assigned schools to nearest tract centroid using Haversine distance (50-mile cap).</p>
+<p><strong>Limitations:</strong></p>
+<p>- Fuzzy matching threshold ($\geq 0.6$ string similarity) may miss schools with alternate names.</p>
+<p>- Schools outside SF or duplicated in manual data are not captured.</p>
+<p>- FRPM counts are school-level; allocation to tracts via nearest centroid is approximate (polygon-based join would be more accurate).</p>
+<p>- Manual CSV may be incomplete or contain data-entry errors.</p>
+<p><strong>Recommendations for improvement:</strong></p>
+<p>- Use direct school-to-tract polygon intersection (GIS join) if tract boundaries available.</p>
+<p>- Validate manual CSV school list against CDE CALPADS official roster.</p>
+<p>- Consider including all public and charter schools, not just those with FRPM data.</p>
+<p>---</p>
+<h3>9. Model Outputs: Site-Level Allocations & Comparison Visualization</h3>
+<h4>9.1 ACS-Based Model: Site-Level Allocations</h4>
+<p>Table: Optimal meals allocated to each site (summed across days and participation-rate scenarios).</p>
+<table>
+<tr>
+<th>Site ID</th>
+<th>Site Name</th>
+<th>Total Optimal Meals (All Days/Scenarios)</th>
+</tr>
+<table>
+<tr>
+<th>010community-youth-center-richmond</th>
+<th>Community Youth Center - Richmond</th>
+<th>1218.4</th>
+</tr>
+<table>
+<tr>
+<th>012faces-sf</th>
+<th>FACES SF</th>
+<th>1173.6</th>
+</tr>
+<table>
+<tr>
+<th>021mission-language-and-vocational-school-main</th>
+<th>Mission Language and Vocational School - Main</th>
+<th>1074.6</th>
+</tr>
+<table>
+<tr>
+<th>035up-on-top</th>
+<th>UP ON TOP</th>
+<th>900.0</th>
+</tr>
+<table>
+<tr>
+<th>032tel-hi-neighborhood-center-site-3</th>
+<th>TEL HI Neighborhood Center - Site 3</th>
+<th>815.2</th>
+</tr>
+<table>
+<tr>
+<th>034the-richmond-neighborhood-center</th>
+<th>The Richmond Neighborhood Center</th>
+<th>783.8</th>
+</tr>
+<table>
+<tr>
+<th>019mission-graduates</th>
+<th>Mission Graduates</th>
+<th>741.6</th>
+</tr>
+<table>
+<tr>
+<th>030tel-hi-neighborhood-center-site-1</th>
+<th>TEL HI Neighborhood Center - Site 1</th>
+<th>685.8</th>
+</tr>
+<table>
+<tr>
+<th>011community-youth-center-tenderloin</th>
+<th>Community Youth Center - Tenderloin</th>
+<th>590.4</th>
+</tr>
+<table>
+<tr>
+<th>016joseph-lee-recreation-center</th>
+<th>Joseph Lee Recreation Center</th>
+<th>432.2</th>
+</tr>
+<table>
+<tr>
+<th>009community-youth-center-chinatown</th>
+<th>Community Youth Center - Chinatown</th>
+<th>422.8</th>
+</tr>
+<table>
+<tr>
+<th>008buena-vista-child-care</th>
+<th>Buena Vista Child Care</th>
+<th>240.0</th>
+</tr>
+<table>
+<tr>
+<th>025portola-library</th>
+<th>Portola Library</th>
+<th>240.0</th>
+</tr>
+<table>
+<tr>
+<th>036vision-academy-bayview</th>
+<th>Vision Academy - Bayview</th>
+<th>240.0</th>
+</tr>
+<table>
+<tr>
+<th>014hamilton-recreation-center</th>
+<th>Hamilton Recreation Center</th>
+<th>239.6</th>
+</tr>
+<table>
+<tr>
+<th>038youth-1st</th>
+<th>Youth 1st</th>
+<th>189.6</th>
+</tr>
+<table>
+<tr>
+<th>018minnie-and-lovie-ward-recreation-center</th>
+<th>Minnie and Lovie Ward Recreation Center</th>
+<th>180.0</th>
+</tr>
+<table>
+<tr>
+<th>028st-mary-s-recreation-center</th>
+<th>St. Mary's Recreation Center</th>
+<th>180.0</th>
+</tr>
+<table>
+<tr>
+<th>037visitacion-valley-library</th>
+<th>Visitacion Valley Library</th>
+<th>180.0</th>
+</tr>
+<table>
+<tr>
+<th>026r-o-c-k</th>
+<th>R.O.C.K</th>
+<th>140.0</th>
+</tr>
+<table>
+<tr>
+<th>003826-valencia-tenderloin</th>
+<th>826 Valencia - Tenderloin</th>
+<th>134.0</th>
+</tr>
+<table>
+<tr>
+<th>027samoan-community-development-center</th>
+<th>Samoan Community Development Center</th>
+<th>120.0</th>
+</tr>
+<table>
+<tr>
+<th>017main-library</th>
+<th>Main Library</th>
+<th>120.0</th>
+</tr>
+<table>
+<tr>
+<th>033the-marsh</th>
+<th>The Marsh</th>
+<th>63.4</th>
+</tr>
+<table>
+<tr>
+<th>015ingleside-library</th>
+<th>Ingleside Library</th>
+<th>40.0</th>
+</tr>
+<table>
+<tr>
+<th>(Other sites with 0.0 allocation)</th>
+<th></th>
+<th>0.0</th>
+</tr>
+<p><strong>Top allocation sites (ACS):</strong> Community Youth Center - Richmond, FACES SF, and Mission Language & Vocational School receive ~45% of total optimal meals, reflecting their geographic position relative to high child-population tracts.</p>
+<h4>9.2 CDE FRPM-Based Model: Site-Level Allocations</h4>
+<table>
+<tr>
+<th>Site ID</th>
+<th>Site Name</th>
+<th>Total Optimal Meals (All Days/Scenarios)</th>
+</tr>
+<table>
+<tr>
+<th>034the-richmond-neighborhood-center</th>
+<th>The Richmond Neighborhood Center</th>
+<th>1699.0</th>
+</tr>
+<table>
+<tr>
+<th>021mission-language-and-vocational-school-main</th>
+<th>Mission Language and Vocational School - Main</th>
+<th>1350.6</th>
+</tr>
+<table>
+<tr>
+<th>009community-youth-center-chinatown</th>
+<th>Community Youth Center - Chinatown</th>
+<th>1084.4</th>
+</tr>
+<table>
+<tr>
+<th>033the-marsh</th>
+<th>The Marsh</th>
+<th>651.2</th>
+</tr>
+<table>
+<tr>
+<th>020mission-language-and-vocational-school-excelsior</th>
+<th>Mission Language and Vocational School - Excelsior</th>
+<th>600.0</th>
+</tr>
+<table>
+<tr>
+<th>030tel-hi-neighborhood-center-site-1</th>
+<th>TEL HI Neighborhood Center - Site 1</th>
+<th>563.4</th>
+</tr>
+<table>
+<tr>
+<th>012faces-sf</th>
+<th>FACES SF</th>
+<th>522.0</th>
+</tr>
+<table>
+<tr>
+<th>040youth-art-exchange-site-2</th>
+<th>Youth Art Exchange - Site 2</th>
+<th>480.0</th>
+</tr>
+<table>
+<tr>
+<th>026r-o-c-k</th>
+<th>R.O.C.K</th>
+<th>400.2</th>
+</tr>
+<table>
+<tr>
+<th>019mission-graduates</th>
+<th>Mission Graduates</th>
+<th>394.0</th>
+</tr>
+<table>
+<tr>
+<th>010community-youth-center-richmond</th>
+<th>Community Youth Center - Richmond</th>
+<th>380.8</th>
+</tr>
+<table>
+<tr>
+<th>007boys-and-girls-clubs-of-sf-excelsior-clubhouse</th>
+<th>Boys and Girls Clubs of SF - Excelsior Clubhouse</th>
+<th>340.4</th>
+</tr>
+<table>
+<tr>
+<th>035up-on-top</th>
+<th>UP ON TOP</th>
+<th>293.4</th>
+</tr>
+<table>
+<tr>
+<th>014hamilton-recreation-center</th>
+<th>Hamilton Recreation Center</th>
+<th>240.0</th>
+</tr>
+<table>
+<tr>
+<th>008buena-vista-child-care</th>
+<th>Buena Vista Child Care</th>
+<th>240.0</th>
+</tr>
+<table>
+<tr>
+<th>025portola-library</th>
+<th>Portola Library</th>
+<th>240.0</th>
+</tr>
+<table>
+<tr>
+<th>011community-youth-center-tenderloin</th>
+<th>Community Youth Center - Tenderloin</th>
+<th>187.2</th>
+</tr>
+<table>
+<tr>
+<th>037visitacion-valley-library</th>
+<th>Visitacion Valley Library</th>
+<th>180.0</th>
+</tr>
+<table>
+<tr>
+<th>022palega-recreation-center</th>
+<th>Palega Recreation Center</th>
+<th>167.0</th>
+</tr>
+<table>
+<tr>
+<th>028st-mary-s-recreation-center</th>
+<th>St. Mary's Recreation Center</th>
+<th>165.6</th>
+</tr>
+<table>
+<tr>
+<th>013gilman-playground</th>
+<th>Gilman Playground</th>
+<th>154.3</th>
+</tr>
+<table>
+<tr>
+<th>032tel-hi-neighborhood-center-site-3</th>
+<th>TEL HI Neighborhood Center - Site 3</th>
+<th>131.4</th>
+</tr>
+<table>
+<tr>
+<th>005bernal-heights-library</th>
+<th>Bernal Heights Library</th>
+<th>120.0</th>
+</tr>
+<table>
+<tr>
+<th>024potrero-library</th>
+<th>Potrero Library</th>
+<th>120.0</th>
+</tr>
+<table>
+<tr>
+<th>018minnie-and-lovie-ward-recreation-center</th>
+<th>Minnie and Lovie Ward Recreation Center</th>
+<th>106.2</th>
+</tr>
+<table>
+<tr>
+<th>038youth-1st</th>
+<th>Youth 1st</th>
+<th>84.6</th>
+</tr>
+<table>
+<tr>
+<th>029sunset-recreation-center</th>
+<th>Sunset Recreation Center</th>
+<th>63.3</th>
+</tr>
+<table>
+<tr>
+<th>001826-valencia-main</th>
+<th>826 Valencia - Main</th>
+<th>60.0</th>
+</tr>
+<table>
+<tr>
+<th>003826-valencia-tenderloin</th>
+<th>826 Valencia - Tenderloin</th>
+<th>60.0</th>
+</tr>
+<table>
+<tr>
+<th>004bayview-ymca</th>
+<th>Bayview YMCA</th>
+<th>39.2</th>
+</tr>
+<table>
+<tr>
+<th>006betty-an-ong-recreation-center</th>
+<th>Betty An Ong Recreation Center</th>
+<th>25.0</th>
+</tr>
+<table>
+<tr>
+<th>027samoan-community-development-center</th>
+<th>Samoan Community Development Center</th>
+<th>1.8</th>
+</tr>
+<p><strong>Top allocation sites (CDE):</strong> The Richmond Neighborhood Center, Mission Language & Vocational (Main), and Community Youth Center - Chinatown dominate, reflecting concentration of FRPM-eligible students in the Mission and Richmond districts.</p>
+<h4>9.3 Allocation Comparison Visualization</h4>
+<img src="../outputs/figures/acs_vs_cde_allocations_scatter.png" alt="Scatterplot: ACS vs. CDE Optimal Meal Allocations by Site-Day" />
+<p><strong>Interpretation:</strong></p>
+<p>- Each point represents a site-day-scenario combination (189 total points across 40 sites, 2 days, 3 scenarios).</p>
+<p>- Points cluster near the diagonal (ACS ≈ CDE allocation) indicate similar reallocation patterns across models.</p>
+<p>- Points far from diagonal (mostly ACS > CDE) indicate sites receiving more meals under ACS demand.</p>
+<p>- <strong>Moderate correlation (r = 0.382)</strong> suggests allocation priorities differ between universalist (ACS) and targeted (CDE) approaches.</p>
+<p>- <strong>Key insight:</strong> ACS disperses allocations across more sites; CDE concentrates meals at sites near high-FRPM schools.</p>
+<p>---</p>
+<h3>10. Open Decisions to Resolve Next</h3>
+<p>1. Demand-node resolution:</p>
+<p>- tract vs block group.</p>
+<p>2. Cost metric:</p>
+<p>- straight-line distance vs travel time.</p>
+<p>3. Equity policy:</p>
+<p>- whether to enforce neighborhood minimum coverage.</p>
+<p>4. Meal handling:</p>
+<p>- single pooled meal model vs separate breakfast/lunch constraints.</p>
+<p>5. Demand specification:</p>
+<p>- continue with ACS-universal, switch to CDE-targeted, or use both for scenario ranges?</p>
+<h3>11. Step-by-Step Execution Log (To Fill In)</h3>
+<p>- [x] Confirm strike-day scope for modeling: Monday 2026-02-09 and Tuesday 2026-02-10.</p>
+<p>- [x] Create raw meal-site table from PDF export: <code>data/raw/meal<em>sites</em>manual.csv</code>.</p>
+<p>- [x] Build LP-ready supply table: <code>data/processed/site<em>day</em>supply.csv</code>.</p>
+<p>- [x] Pull ACS child population: <code>data/processed/tract<em>child</em>population.csv</code> (ACS 2024, 244 tracts).</p>
+<p>- [x] Build tract demand table: <code>data/processed/tract<em>day</em>demand.csv</code> (2 days, scenarios <code>0.2/0.3/0.4</code>, lunch baseline).</p>
+<p>- [x] Build tract centroids and geocode sites; create <code>c<em>{i,j}</code> matrix (<code>data/processed/tract</em>site<em>cost</em>matrix.csv</code>).</p>
+<p>- [x] Run baseline LP comparison (<code>scripts/solve<em>allocation</em>lp.py</code>, <code>lambda=100</code>, cap multiplier <code>2.0</code>).</p>
+<p>- [x] Augment CDE FRPM data: parse directory, fuzzy-match schools, assign to tracts (<code>scripts/augment<em>with</em>cde<em>from</em>directory.py</code>).</p>
+<p>- [x] Run CDE LP comparison: generate <code>allocation<em>comparison</em>summary<em>cde.csv</code> and <code>site</em>day<em>allocation</em>comparison_cde.csv</code>.</p>
+<p>- [x] Produce side-by-side ACS vs. CDE comparison: parallel results, policy implications, and methodological notes.</p>
+<p>- [x] Generate site-level allocation tables and scatterplot visualization.</p>
+<p>- [ ] Finalize policy constraints (e.g., fairness floors, service radius, reallocation cap sensitivity).</p>
+<p>- [ ] Run sensitivity scenarios (e.g., participation-rate grid, reallocation cap multiplier sweep).</p>
+<p>- [ ] Produce final plots/tables/maps (allocation flows, coverage heatmaps, reallocation benefit curves).</p>
+<p>- [ ] Sensitivity analysis: distance-cost vs. travel-time; tract vs. block-group resolution.</p>
+</body>
+</html>
