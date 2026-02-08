@@ -1,0 +1,190 @@
+scenario_id,participation_rate,distribution_date,site_id,site_name,status_quo_meals,optimal_meals,delta_meals
+pr_0p2,0.2,2026-02-09,004_bayview-ymca,Bayview YMCA,50.0,19.6,-30.4
+pr_0p2,0.2,2026-02-09,007_boys-and-girls-clubs-of-sf-excelsior-clubhouse,Boys and Girls Clubs of SF - Excelsior Clubhouse,30.0,50.2,20.2
+pr_0p2,0.2,2026-02-09,009_community-youth-center-chinatown,Community Youth Center - Chinatown,100.0,142.2,42.2
+pr_0p2,0.2,2026-02-09,010_community-youth-center-richmond,Community Youth Center - Richmond,150.0,100.8,-49.2
+pr_0p2,0.2,2026-02-09,011_community-youth-center-tenderloin,Community Youth Center - Tenderloin,50.0,20.8,-29.2
+pr_0p2,0.2,2026-02-09,012_faces-sf,FACES SF,100.0,58.0,-42.0
+pr_0p2,0.2,2026-02-09,013_gilman-playground,Gilman Playground,45.0,51.2,6.2
+pr_0p2,0.2,2026-02-09,014_hamilton-recreation-center,Hamilton Recreation Center,20.0,40.0,20.0
+pr_0p2,0.2,2026-02-09,016_joseph-lee-recreation-center,Joseph Lee Recreation Center,40.0,0.0,-40.0
+pr_0p2,0.2,2026-02-09,019_mission-graduates,Mission Graduates,100.0,106.2,6.2
+pr_0p2,0.2,2026-02-09,021_mission-language-and-vocational-school-main,Mission Language and Vocational School - Main,150.0,227.0,77.0
+pr_0p2,0.2,2026-02-09,023_pomeroy-recreation-rehabilitation-center,Pomeroy Recreation & Rehabilitation Center,20.0,0.0,-20.0
+pr_0p2,0.2,2026-02-09,026_r-o-c-k,R.O.C.K,40.0,80.0,40.0
+pr_0p2,0.2,2026-02-09,027_samoan-community-development-center,Samoan Community Development Center,30.0,0.2,-29.8
+pr_0p2,0.2,2026-02-09,030_tel-hi-neighborhood-center-site-1,TEL HI Neighborhood Center - Site 1,90.0,62.6,-27.4
+pr_0p2,0.2,2026-02-09,031_tel-hi-neighborhood-center-site-2,TEL HI Neighborhood Center - Site 2,50.0,0.0,-50.0
+pr_0p2,0.2,2026-02-09,032_tel-hi-neighborhood-center-site-3,TEL HI Neighborhood Center - Site 3,75.0,14.6,-60.4
+pr_0p2,0.2,2026-02-09,033_the-marsh,The Marsh,80.0,160.0,80.0
+pr_0p2,0.2,2026-02-09,034_the-richmond-neighborhood-center,The Richmond Neighborhood Center,150.0,290.4,140.4
+pr_0p2,0.2,2026-02-09,035_up-on-top,UP ON TOP,75.0,32.6,-42.4
+pr_0p2,0.2,2026-02-09,038_youth-1st,Youth 1st,50.0,38.6,-11.4
+pr_0p2,0.2,2026-02-09,039_youth-art-exchange-site-1,Youth Art Exchange - Site 1,50.0,0.0,-50.0
+pr_0p2,0.2,2026-02-09,040_youth-art-exchange-site-2,Youth Art Exchange - Site 2,50.0,100.0,50.0
+pr_0p2,0.2,2026-02-10,001_826-valencia-main,826 Valencia - Main,30.0,60.0,30.0
+pr_0p2,0.2,2026-02-10,002_826-valencia-mission-bay,826 Valencia - Mission Bay,30.0,0.0,-30.0
+pr_0p2,0.2,2026-02-10,003_826-valencia-tenderloin,826 Valencia - Tenderloin,30.0,60.0,30.0
+pr_0p2,0.2,2026-02-10,004_bayview-ymca,Bayview YMCA,50.0,19.6,-30.4
+pr_0p2,0.2,2026-02-10,005_bernal-heights-library,Bernal Heights Library,20.0,40.0,20.0
+pr_0p2,0.2,2026-02-10,006_betty-an-ong-recreation-center,Betty An Ong Recreation Center,30.0,25.0,-5.0
+pr_0p2,0.2,2026-02-10,007_boys-and-girls-clubs-of-sf-excelsior-clubhouse,Boys and Girls Clubs of SF - Excelsior Clubhouse,30.0,50.2,20.2
+pr_0p2,0.2,2026-02-10,008_buena-vista-child-care,Buena Vista Child Care,40.0,80.0,40.0
+pr_0p2,0.2,2026-02-10,009_community-youth-center-chinatown,Community Youth Center - Chinatown,100.0,142.2,42.2
+pr_0p2,0.2,2026-02-10,010_community-youth-center-richmond,Community Youth Center - Richmond,100.0,100.8,0.8
+pr_0p2,0.2,2026-02-10,011_community-youth-center-tenderloin,Community Youth Center - Tenderloin,50.0,20.8,-29.2
+pr_0p2,0.2,2026-02-10,012_faces-sf,FACES SF,100.0,58.0,-42.0
+pr_0p2,0.2,2026-02-10,013_gilman-playground,Gilman Playground,45.0,51.2,6.2
+pr_0p2,0.2,2026-02-10,014_hamilton-recreation-center,Hamilton Recreation Center,20.0,40.0,20.0
+pr_0p2,0.2,2026-02-10,015_ingleside-library,Ingleside Library,20.0,0.0,-20.0
+pr_0p2,0.2,2026-02-10,016_joseph-lee-recreation-center,Joseph Lee Recreation Center,40.0,0.0,-40.0
+pr_0p2,0.2,2026-02-10,017_main-library,Main Library,20.0,0.0,-20.0
+pr_0p2,0.2,2026-02-10,018_minnie-and-lovie-ward-recreation-center,Minnie and Lovie Ward Recreation Center,30.0,23.6,-6.4
+pr_0p2,0.2,2026-02-10,019_mission-graduates,Mission Graduates,100.0,66.6,-33.4
+pr_0p2,0.2,2026-02-10,020_mission-language-and-vocational-school-excelsior,Mission Language and Vocational School - Excelsior,100.0,200.0,100.0
+pr_0p2,0.2,2026-02-10,021_mission-language-and-vocational-school-main,Mission Language and Vocational School - Main,150.0,205.4,55.4
+pr_0p2,0.2,2026-02-10,022_palega-recreation-center,Palega Recreation Center,30.0,47.0,17.0
+pr_0p2,0.2,2026-02-10,023_pomeroy-recreation-rehabilitation-center,Pomeroy Recreation & Rehabilitation Center,50.0,0.0,-50.0
+pr_0p2,0.2,2026-02-10,024_potrero-library,Potrero Library,20.0,40.0,20.0
+pr_0p2,0.2,2026-02-10,025_portola-library,Portola Library,40.0,80.0,40.0
+pr_0p2,0.2,2026-02-10,026_r-o-c-k,R.O.C.K,30.0,40.2,10.2
+pr_0p2,0.2,2026-02-10,027_samoan-community-development-center,Samoan Community Development Center,30.0,0.2,-29.8
+pr_0p2,0.2,2026-02-10,028_st-mary-s-recreation-center,St. Mary's Recreation Center,30.0,60.0,30.0
+pr_0p2,0.2,2026-02-10,029_sunset-recreation-center,Sunset Recreation Center,30.0,60.0,30.0
+pr_0p2,0.2,2026-02-10,030_tel-hi-neighborhood-center-site-1,TEL HI Neighborhood Center - Site 1,90.0,62.6,-27.4
+pr_0p2,0.2,2026-02-10,031_tel-hi-neighborhood-center-site-2,TEL HI Neighborhood Center - Site 2,50.0,0.0,-50.0
+pr_0p2,0.2,2026-02-10,032_tel-hi-neighborhood-center-site-3,TEL HI Neighborhood Center - Site 3,75.0,14.6,-60.4
+pr_0p2,0.2,2026-02-10,033_the-marsh,The Marsh,80.0,61.4,-18.6
+pr_0p2,0.2,2026-02-10,034_the-richmond-neighborhood-center,The Richmond Neighborhood Center,150.0,219.4,69.4
+pr_0p2,0.2,2026-02-10,035_up-on-top,UP ON TOP,75.0,32.6,-42.4
+pr_0p2,0.2,2026-02-10,036_vision-academy-bayview,Vision Academy - Bayview,60.0,0.0,-60.0
+pr_0p2,0.2,2026-02-10,037_visitacion-valley-library,Visitacion Valley Library,30.0,60.0,30.0
+pr_0p2,0.2,2026-02-10,038_youth-1st,Youth 1st,50.0,38.6,-11.4
+pr_0p2,0.2,2026-02-10,039_youth-art-exchange-site-1,Youth Art Exchange - Site 1,35.0,0.0,-35.0
+pr_0p2,0.2,2026-02-10,040_youth-art-exchange-site-2,Youth Art Exchange - Site 2,30.0,60.0,30.0
+pr_0p3,0.3,2026-02-09,004_bayview-ymca,Bayview YMCA,50.0,0.0,-50.0
+pr_0p3,0.3,2026-02-09,007_boys-and-girls-clubs-of-sf-excelsior-clubhouse,Boys and Girls Clubs of SF - Excelsior Clubhouse,30.0,60.0,30.0
+pr_0p3,0.3,2026-02-09,009_community-youth-center-chinatown,Community Youth Center - Chinatown,100.0,200.0,100.0
+pr_0p3,0.3,2026-02-09,010_community-youth-center-richmond,Community Youth Center - Richmond,150.0,38.4,-111.6
+pr_0p3,0.3,2026-02-09,011_community-youth-center-tenderloin,Community Youth Center - Tenderloin,50.0,31.2,-18.8
+pr_0p3,0.3,2026-02-09,012_faces-sf,FACES SF,100.0,87.0,-13.0
+pr_0p3,0.3,2026-02-09,013_gilman-playground,Gilman Playground,45.0,51.9,6.9
+pr_0p3,0.3,2026-02-09,014_hamilton-recreation-center,Hamilton Recreation Center,20.0,40.0,20.0
+pr_0p3,0.3,2026-02-09,016_joseph-lee-recreation-center,Joseph Lee Recreation Center,40.0,0.0,-40.0
+pr_0p3,0.3,2026-02-09,019_mission-graduates,Mission Graduates,100.0,47.4,-52.6
+pr_0p3,0.3,2026-02-09,021_mission-language-and-vocational-school-main,Mission Language and Vocational School - Main,150.0,300.0,150.0
+pr_0p3,0.3,2026-02-09,023_pomeroy-recreation-rehabilitation-center,Pomeroy Recreation & Rehabilitation Center,20.0,0.0,-20.0
+pr_0p3,0.3,2026-02-09,026_r-o-c-k,R.O.C.K,40.0,80.0,40.0
+pr_0p3,0.3,2026-02-09,027_samoan-community-development-center,Samoan Community Development Center,30.0,0.3,-29.7
+pr_0p3,0.3,2026-02-09,030_tel-hi-neighborhood-center-site-1,TEL HI Neighborhood Center - Site 1,90.0,93.9,3.9
+pr_0p3,0.3,2026-02-09,031_tel-hi-neighborhood-center-site-2,TEL HI Neighborhood Center - Site 2,50.0,0.0,-50.0
+pr_0p3,0.3,2026-02-09,032_tel-hi-neighborhood-center-site-3,TEL HI Neighborhood Center - Site 3,75.0,21.9,-53.1
+pr_0p3,0.3,2026-02-09,033_the-marsh,The Marsh,80.0,92.1,12.1
+pr_0p3,0.3,2026-02-09,034_the-richmond-neighborhood-center,The Richmond Neighborhood Center,150.0,294.6,144.6
+pr_0p3,0.3,2026-02-09,035_up-on-top,UP ON TOP,75.0,48.9,-26.1
+pr_0p3,0.3,2026-02-09,038_youth-1st,Youth 1st,50.0,7.4,-42.6
+pr_0p3,0.3,2026-02-09,039_youth-art-exchange-site-1,Youth Art Exchange - Site 1,50.0,0.0,-50.0
+pr_0p3,0.3,2026-02-09,040_youth-art-exchange-site-2,Youth Art Exchange - Site 2,50.0,100.0,50.0
+pr_0p3,0.3,2026-02-10,001_826-valencia-main,826 Valencia - Main,30.0,0.0,-30.0
+pr_0p3,0.3,2026-02-10,002_826-valencia-mission-bay,826 Valencia - Mission Bay,30.0,0.0,-30.0
+pr_0p3,0.3,2026-02-10,003_826-valencia-tenderloin,826 Valencia - Tenderloin,30.0,0.0,-30.0
+pr_0p3,0.3,2026-02-10,004_bayview-ymca,Bayview YMCA,50.0,0.0,-50.0
+pr_0p3,0.3,2026-02-10,005_bernal-heights-library,Bernal Heights Library,20.0,40.0,20.0
+pr_0p3,0.3,2026-02-10,006_betty-an-ong-recreation-center,Betty An Ong Recreation Center,30.0,0.0,-30.0
+pr_0p3,0.3,2026-02-10,007_boys-and-girls-clubs-of-sf-excelsior-clubhouse,Boys and Girls Clubs of SF - Excelsior Clubhouse,30.0,60.0,30.0
+pr_0p3,0.3,2026-02-10,008_buena-vista-child-care,Buena Vista Child Care,40.0,80.0,40.0
+pr_0p3,0.3,2026-02-10,009_community-youth-center-chinatown,Community Youth Center - Chinatown,100.0,200.0,100.0
+pr_0p3,0.3,2026-02-10,010_community-youth-center-richmond,Community Youth Center - Richmond,100.0,38.4,-61.6
+pr_0p3,0.3,2026-02-10,011_community-youth-center-tenderloin,Community Youth Center - Tenderloin,50.0,31.2,-18.8
+pr_0p3,0.3,2026-02-10,012_faces-sf,FACES SF,100.0,87.0,-13.0
+pr_0p3,0.3,2026-02-10,013_gilman-playground,Gilman Playground,45.0,0.0,-45.0
+pr_0p3,0.3,2026-02-10,014_hamilton-recreation-center,Hamilton Recreation Center,20.0,40.0,20.0
+pr_0p3,0.3,2026-02-10,015_ingleside-library,Ingleside Library,20.0,0.0,-20.0
+pr_0p3,0.3,2026-02-10,016_joseph-lee-recreation-center,Joseph Lee Recreation Center,40.0,0.0,-40.0
+pr_0p3,0.3,2026-02-10,017_main-library,Main Library,20.0,0.0,-20.0
+pr_0p3,0.3,2026-02-10,018_minnie-and-lovie-ward-recreation-center,Minnie and Lovie Ward Recreation Center,30.0,35.4,5.4
+pr_0p3,0.3,2026-02-10,019_mission-graduates,Mission Graduates,100.0,47.4,-52.6
+pr_0p3,0.3,2026-02-10,020_mission-language-and-vocational-school-excelsior,Mission Language and Vocational School - Excelsior,100.0,200.0,100.0
+pr_0p3,0.3,2026-02-10,021_mission-language-and-vocational-school-main,Mission Language and Vocational School - Main,150.0,300.0,150.0
+pr_0p3,0.3,2026-02-10,022_palega-recreation-center,Palega Recreation Center,30.0,60.0,30.0
+pr_0p3,0.3,2026-02-10,023_pomeroy-recreation-rehabilitation-center,Pomeroy Recreation & Rehabilitation Center,50.0,0.0,-50.0
+pr_0p3,0.3,2026-02-10,024_potrero-library,Potrero Library,20.0,40.0,20.0
+pr_0p3,0.3,2026-02-10,025_portola-library,Portola Library,40.0,80.0,40.0
+pr_0p3,0.3,2026-02-10,026_r-o-c-k,R.O.C.K,30.0,60.0,30.0
+pr_0p3,0.3,2026-02-10,027_samoan-community-development-center,Samoan Community Development Center,30.0,0.3,-29.7
+pr_0p3,0.3,2026-02-10,028_st-mary-s-recreation-center,St. Mary's Recreation Center,30.0,45.6,15.6
+pr_0p3,0.3,2026-02-10,029_sunset-recreation-center,Sunset Recreation Center,30.0,3.3,-26.7
+pr_0p3,0.3,2026-02-10,030_tel-hi-neighborhood-center-site-1,TEL HI Neighborhood Center - Site 1,90.0,93.9,3.9
+pr_0p3,0.3,2026-02-10,031_tel-hi-neighborhood-center-site-2,TEL HI Neighborhood Center - Site 2,50.0,0.0,-50.0
+pr_0p3,0.3,2026-02-10,032_tel-hi-neighborhood-center-site-3,TEL HI Neighborhood Center - Site 3,75.0,21.9,-53.1
+pr_0p3,0.3,2026-02-10,033_the-marsh,The Marsh,80.0,92.1,12.1
+pr_0p3,0.3,2026-02-10,034_the-richmond-neighborhood-center,The Richmond Neighborhood Center,150.0,294.6,144.6
+pr_0p3,0.3,2026-02-10,035_up-on-top,UP ON TOP,75.0,48.9,-26.1
+pr_0p3,0.3,2026-02-10,036_vision-academy-bayview,Vision Academy - Bayview,60.0,0.0,-60.0
+pr_0p3,0.3,2026-02-10,037_visitacion-valley-library,Visitacion Valley Library,30.0,60.0,30.0
+pr_0p3,0.3,2026-02-10,038_youth-1st,Youth 1st,50.0,0.0,-50.0
+pr_0p3,0.3,2026-02-10,039_youth-art-exchange-site-1,Youth Art Exchange - Site 1,35.0,0.0,-35.0
+pr_0p3,0.3,2026-02-10,040_youth-art-exchange-site-2,Youth Art Exchange - Site 2,30.0,60.0,30.0
+pr_0p4,0.4,2026-02-09,004_bayview-ymca,Bayview YMCA,50.0,0.0,-50.0
+pr_0p4,0.4,2026-02-09,007_boys-and-girls-clubs-of-sf-excelsior-clubhouse,Boys and Girls Clubs of SF - Excelsior Clubhouse,30.0,60.0,30.0
+pr_0p4,0.4,2026-02-09,009_community-youth-center-chinatown,Community Youth Center - Chinatown,100.0,200.0,100.0
+pr_0p4,0.4,2026-02-09,010_community-youth-center-richmond,Community Youth Center - Richmond,150.0,51.2,-98.8
+pr_0p4,0.4,2026-02-09,011_community-youth-center-tenderloin,Community Youth Center - Tenderloin,50.0,41.6,-8.4
+pr_0p4,0.4,2026-02-09,012_faces-sf,FACES SF,100.0,116.0,16.0
+pr_0p4,0.4,2026-02-09,013_gilman-playground,Gilman Playground,45.0,0.0,-45.0
+pr_0p4,0.4,2026-02-09,014_hamilton-recreation-center,Hamilton Recreation Center,20.0,40.0,20.0
+pr_0p4,0.4,2026-02-09,016_joseph-lee-recreation-center,Joseph Lee Recreation Center,40.0,0.0,-40.0
+pr_0p4,0.4,2026-02-09,019_mission-graduates,Mission Graduates,100.0,63.2,-36.8
+pr_0p4,0.4,2026-02-09,021_mission-language-and-vocational-school-main,Mission Language and Vocational School - Main,150.0,200.2,50.2
+pr_0p4,0.4,2026-02-09,023_pomeroy-recreation-rehabilitation-center,Pomeroy Recreation & Rehabilitation Center,20.0,0.0,-20.0
+pr_0p4,0.4,2026-02-09,026_r-o-c-k,R.O.C.K,40.0,80.0,40.0
+pr_0p4,0.4,2026-02-09,027_samoan-community-development-center,Samoan Community Development Center,30.0,0.4,-29.6
+pr_0p4,0.4,2026-02-09,030_tel-hi-neighborhood-center-site-1,TEL HI Neighborhood Center - Site 1,90.0,125.2,35.2
+pr_0p4,0.4,2026-02-09,031_tel-hi-neighborhood-center-site-2,TEL HI Neighborhood Center - Site 2,50.0,0.0,-50.0
+pr_0p4,0.4,2026-02-09,032_tel-hi-neighborhood-center-site-3,TEL HI Neighborhood Center - Site 3,75.0,29.2,-45.8
+pr_0p4,0.4,2026-02-09,033_the-marsh,The Marsh,80.0,122.8,42.8
+pr_0p4,0.4,2026-02-09,034_the-richmond-neighborhood-center,The Richmond Neighborhood Center,150.0,300.0,150.0
+pr_0p4,0.4,2026-02-09,035_up-on-top,UP ON TOP,75.0,65.2,-9.8
+pr_0p4,0.4,2026-02-09,038_youth-1st,Youth 1st,50.0,0.0,-50.0
+pr_0p4,0.4,2026-02-09,039_youth-art-exchange-site-1,Youth Art Exchange - Site 1,50.0,0.0,-50.0
+pr_0p4,0.4,2026-02-09,040_youth-art-exchange-site-2,Youth Art Exchange - Site 2,50.0,100.0,50.0
+pr_0p4,0.4,2026-02-10,001_826-valencia-main,826 Valencia - Main,30.0,0.0,-30.0
+pr_0p4,0.4,2026-02-10,002_826-valencia-mission-bay,826 Valencia - Mission Bay,30.0,0.0,-30.0
+pr_0p4,0.4,2026-02-10,003_826-valencia-tenderloin,826 Valencia - Tenderloin,30.0,0.0,-30.0
+pr_0p4,0.4,2026-02-10,004_bayview-ymca,Bayview YMCA,50.0,0.0,-50.0
+pr_0p4,0.4,2026-02-10,005_bernal-heights-library,Bernal Heights Library,20.0,40.0,20.0
+pr_0p4,0.4,2026-02-10,006_betty-an-ong-recreation-center,Betty An Ong Recreation Center,30.0,0.0,-30.0
+pr_0p4,0.4,2026-02-10,007_boys-and-girls-clubs-of-sf-excelsior-clubhouse,Boys and Girls Clubs of SF - Excelsior Clubhouse,30.0,60.0,30.0
+pr_0p4,0.4,2026-02-10,008_buena-vista-child-care,Buena Vista Child Care,40.0,80.0,40.0
+pr_0p4,0.4,2026-02-10,009_community-youth-center-chinatown,Community Youth Center - Chinatown,100.0,200.0,100.0
+pr_0p4,0.4,2026-02-10,010_community-youth-center-richmond,Community Youth Center - Richmond,100.0,51.2,-48.8
+pr_0p4,0.4,2026-02-10,011_community-youth-center-tenderloin,Community Youth Center - Tenderloin,50.0,41.6,-8.4
+pr_0p4,0.4,2026-02-10,012_faces-sf,FACES SF,100.0,116.0,16.0
+pr_0p4,0.4,2026-02-10,013_gilman-playground,Gilman Playground,45.0,0.0,-45.0
+pr_0p4,0.4,2026-02-10,014_hamilton-recreation-center,Hamilton Recreation Center,20.0,40.0,20.0
+pr_0p4,0.4,2026-02-10,015_ingleside-library,Ingleside Library,20.0,0.0,-20.0
+pr_0p4,0.4,2026-02-10,016_joseph-lee-recreation-center,Joseph Lee Recreation Center,40.0,0.0,-40.0
+pr_0p4,0.4,2026-02-10,017_main-library,Main Library,20.0,0.0,-20.0
+pr_0p4,0.4,2026-02-10,018_minnie-and-lovie-ward-recreation-center,Minnie and Lovie Ward Recreation Center,30.0,47.2,17.2
+pr_0p4,0.4,2026-02-10,019_mission-graduates,Mission Graduates,100.0,63.2,-36.8
+pr_0p4,0.4,2026-02-10,020_mission-language-and-vocational-school-excelsior,Mission Language and Vocational School - Excelsior,100.0,200.0,100.0
+pr_0p4,0.4,2026-02-10,021_mission-language-and-vocational-school-main,Mission Language and Vocational School - Main,150.0,118.0,-32.0
+pr_0p4,0.4,2026-02-10,022_palega-recreation-center,Palega Recreation Center,30.0,60.0,30.0
+pr_0p4,0.4,2026-02-10,023_pomeroy-recreation-rehabilitation-center,Pomeroy Recreation & Rehabilitation Center,50.0,0.0,-50.0
+pr_0p4,0.4,2026-02-10,024_potrero-library,Potrero Library,20.0,40.0,20.0
+pr_0p4,0.4,2026-02-10,025_portola-library,Portola Library,40.0,80.0,40.0
+pr_0p4,0.4,2026-02-10,026_r-o-c-k,R.O.C.K,30.0,60.0,30.0
+pr_0p4,0.4,2026-02-10,027_samoan-community-development-center,Samoan Community Development Center,30.0,0.4,-29.6
+pr_0p4,0.4,2026-02-10,028_st-mary-s-recreation-center,St. Mary's Recreation Center,30.0,60.0,30.0
+pr_0p4,0.4,2026-02-10,029_sunset-recreation-center,Sunset Recreation Center,30.0,0.0,-30.0
+pr_0p4,0.4,2026-02-10,030_tel-hi-neighborhood-center-site-1,TEL HI Neighborhood Center - Site 1,90.0,125.2,35.2
+pr_0p4,0.4,2026-02-10,031_tel-hi-neighborhood-center-site-2,TEL HI Neighborhood Center - Site 2,50.0,0.0,-50.0
+pr_0p4,0.4,2026-02-10,032_tel-hi-neighborhood-center-site-3,TEL HI Neighborhood Center - Site 3,75.0,29.2,-45.8
+pr_0p4,0.4,2026-02-10,033_the-marsh,The Marsh,80.0,122.8,42.8
+pr_0p4,0.4,2026-02-10,034_the-richmond-neighborhood-center,The Richmond Neighborhood Center,150.0,300.0,150.0
+pr_0p4,0.4,2026-02-10,035_up-on-top,UP ON TOP,75.0,65.2,-9.8
+pr_0p4,0.4,2026-02-10,036_vision-academy-bayview,Vision Academy - Bayview,60.0,0.0,-60.0
+pr_0p4,0.4,2026-02-10,037_visitacion-valley-library,Visitacion Valley Library,30.0,60.0,30.0
+pr_0p4,0.4,2026-02-10,038_youth-1st,Youth 1st,50.0,0.0,-50.0
+pr_0p4,0.4,2026-02-10,039_youth-art-exchange-site-1,Youth Art Exchange - Site 1,35.0,0.0,-35.0
+pr_0p4,0.4,2026-02-10,040_youth-art-exchange-site-2,Youth Art Exchange - Site 2,30.0,60.0,30.0
