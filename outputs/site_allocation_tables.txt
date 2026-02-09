@@ -1,0 +1,89 @@
+## ACS-Based Model: Site-Level Allocations
+
+| Site ID | Site Name | Total Optimal Meals (All Days/Scenarios) |
+|:---|:---|---:|
+| 010_community-youth-center-richmond | Community Youth Center - Richmond | 1218.4 |
+| 012_faces-sf | FACES SF | 1173.6 |
+| 021_mission-language-and-vocational-school-main | Mission Language and Vocational School - Main | 1074.6 |
+| 035_up-on-top | UP ON TOP | 900.0 |
+| 032_tel-hi-neighborhood-center-site-3 | TEL HI Neighborhood Center - Site 3 | 815.2 |
+| 034_the-richmond-neighborhood-center | The Richmond Neighborhood Center | 783.8 |
+| 019_mission-graduates | Mission Graduates | 741.6 |
+| 030_tel-hi-neighborhood-center-site-1 | TEL HI Neighborhood Center - Site 1 | 685.8 |
+| 011_community-youth-center-tenderloin | Community Youth Center - Tenderloin | 590.4 |
+| 016_joseph-lee-recreation-center | Joseph Lee Recreation Center | 432.2 |
+| 009_community-youth-center-chinatown | Community Youth Center - Chinatown | 422.8 |
+| 008_buena-vista-child-care | Buena Vista Child Care | 240.0 |
+| 025_portola-library | Portola Library | 240.0 |
+| 036_vision-academy-bayview | Vision Academy - Bayview | 240.0 |
+| 014_hamilton-recreation-center | Hamilton Recreation Center | 239.6 |
+| 038_youth-1st | Youth 1st | 189.6 |
+| 018_minnie-and-lovie-ward-recreation-center | Minnie and Lovie Ward Recreation Center | 180.0 |
+| 028_st-mary-s-recreation-center | St. Mary's Recreation Center | 180.0 |
+| 037_visitacion-valley-library | Visitacion Valley Library | 180.0 |
+| 026_r-o-c-k | R.O.C.K | 140.0 |
+| 003_826-valencia-tenderloin | 826 Valencia - Tenderloin | 134.0 |
+| 027_samoan-community-development-center | Samoan Community Development Center | 120.0 |
+| 017_main-library | Main Library | 120.0 |
+| 033_the-marsh | The Marsh | 63.4 |
+| 015_ingleside-library | Ingleside Library | 40.0 |
+| 004_bayview-ymca | Bayview YMCA | 0.0 |
+| 007_boys-and-girls-clubs-of-sf-excelsior-clubhouse | Boys and Girls Clubs of SF - Excelsior Clubhouse | 0.0 |
+| 013_gilman-playground | Gilman Playground | 0.0 |
+| 023_pomeroy-recreation-rehabilitation-center | Pomeroy Recreation & Rehabilitation Center | 0.0 |
+| 031_tel-hi-neighborhood-center-site-2 | TEL HI Neighborhood Center - Site 2 | 0.0 |
+| 039_youth-art-exchange-site-1 | Youth Art Exchange - Site 1 | 0.0 |
+| 040_youth-art-exchange-site-2 | Youth Art Exchange - Site 2 | 0.0 |
+| 001_826-valencia-main | 826 Valencia - Main | 0.0 |
+| 002_826-valencia-mission-bay | 826 Valencia - Mission Bay | 0.0 |
+| 005_bernal-heights-library | Bernal Heights Library | 0.0 |
+| 006_betty-an-ong-recreation-center | Betty An Ong Recreation Center | 0.0 |
+| 020_mission-language-and-vocational-school-excelsior | Mission Language and Vocational School - Excelsior | 0.0 |
+| 022_palega-recreation-center | Palega Recreation Center | 0.0 |
+| 024_potrero-library | Potrero Library | 0.0 |
+| 029_sunset-recreation-center | Sunset Recreation Center | 0.0 |
+
+## CDE FRPM-Based Model: Site-Level Allocations
+
+| Site ID | Site Name | Total Optimal Meals (All Days/Scenarios) |
+|:---|:---|---:|
+| 034_the-richmond-neighborhood-center | The Richmond Neighborhood Center | 1699.0 |
+| 021_mission-language-and-vocational-school-main | Mission Language and Vocational School - Main | 1350.6 |
+| 009_community-youth-center-chinatown | Community Youth Center - Chinatown | 1084.4 |
+| 033_the-marsh | The Marsh | 651.2 |
+| 020_mission-language-and-vocational-school-excelsior | Mission Language and Vocational School - Excelsior | 600.0 |
+| 030_tel-hi-neighborhood-center-site-1 | TEL HI Neighborhood Center - Site 1 | 563.4 |
+| 012_faces-sf | FACES SF | 522.0 |
+| 040_youth-art-exchange-site-2 | Youth Art Exchange - Site 2 | 480.0 |
+| 026_r-o-c-k | R.O.C.K | 400.2 |
+| 019_mission-graduates | Mission Graduates | 394.0 |
+| 010_community-youth-center-richmond | Community Youth Center - Richmond | 380.8 |
+| 007_boys-and-girls-clubs-of-sf-excelsior-clubhouse | Boys and Girls Clubs of SF - Excelsior Clubhouse | 340.4 |
+| 035_up-on-top | UP ON TOP | 293.4 |
+| 014_hamilton-recreation-center | Hamilton Recreation Center | 240.0 |
+| 008_buena-vista-child-care | Buena Vista Child Care | 240.0 |
+| 025_portola-library | Portola Library | 240.0 |
+| 011_community-youth-center-tenderloin | Community Youth Center - Tenderloin | 187.2 |
+| 037_visitacion-valley-library | Visitacion Valley Library | 180.0 |
+| 022_palega-recreation-center | Palega Recreation Center | 167.0 |
+| 028_st-mary-s-recreation-center | St. Mary's Recreation Center | 165.6 |
+| 013_gilman-playground | Gilman Playground | 154.3 |
+| 032_tel-hi-neighborhood-center-site-3 | TEL HI Neighborhood Center - Site 3 | 131.4 |
+| 005_bernal-heights-library | Bernal Heights Library | 120.0 |
+| 024_potrero-library | Potrero Library | 120.0 |
+| 018_minnie-and-lovie-ward-recreation-center | Minnie and Lovie Ward Recreation Center | 106.2 |
+| 038_youth-1st | Youth 1st | 84.6 |
+| 029_sunset-recreation-center | Sunset Recreation Center | 63.3 |
+| 001_826-valencia-main | 826 Valencia - Main | 60.0 |
+| 003_826-valencia-tenderloin | 826 Valencia - Tenderloin | 60.0 |
+| 004_bayview-ymca | Bayview YMCA | 39.2 |
+| 006_betty-an-ong-recreation-center | Betty An Ong Recreation Center | 25.0 |
+| 027_samoan-community-development-center | Samoan Community Development Center | 1.8 |
+| 016_joseph-lee-recreation-center | Joseph Lee Recreation Center | 0.0 |
+| 023_pomeroy-recreation-rehabilitation-center | Pomeroy Recreation & Rehabilitation Center | 0.0 |
+| 031_tel-hi-neighborhood-center-site-2 | TEL HI Neighborhood Center - Site 2 | 0.0 |
+| 039_youth-art-exchange-site-1 | Youth Art Exchange - Site 1 | 0.0 |
+| 002_826-valencia-mission-bay | 826 Valencia - Mission Bay | 0.0 |
+| 015_ingleside-library | Ingleside Library | 0.0 |
+| 017_main-library | Main Library | 0.0 |
+| 036_vision-academy-bayview | Vision Academy - Bayview | 0.0 |

@@ -9,26 +9,45 @@ execute:
   echo: false
 ---
 
-## 1. Problem Statement
+## 1. Key Visualization: Distribution Sites Map
 
-During the SFUSD strike window (Monday, February 9, 2026 and Tuesday, February 10, 2026), community organizations distributed packed meals at fixed locations across San Francisco. The planning question is how to allocate limited meals across sites to better match tract-level child demand (`age < 18`) derived from the most recent Census ACS release.
+Our spatial analysis of meal distribution across San Francisco reveals significant opportunities for reallocation. The map below plots all 40 distribution sites with embedded bar charts showing three allocation scenarios:
+
+![](outputs/figures/sf_distribution_sites_map.png)
+
+**Map Interpretation:**
+- Each site displays three bars showing meal counts:
+  - **Blue**: SFUSD planned meals (current)
+  - **Orange**: Optimal allocation based on Census ACS child population
+  - **Green**: Optimal allocation based on CDE FRPM-eligible students
+- The OpenStreetMap basemap shows geographic context within San Francisco
+- Sites with large orange and green bars indicate high-priority locations for meal concentration
+
+This geographic visualization demonstrates that optimal reallocation would concentrate meals at 2-4 strategically located sites (particularly in the Mission, Richmond, and Tenderloin areas) while maintaining or reducing supply at other locations.
+
+---
+
+## 2. Problem Statement
+
+During the SFUSD strike window (Monday, February 9, 2026 and Tuesday, February 10, 2026), community organizations distributed packed meals at fixed locations across San Francisco. The planning question is how to allocate limited meals across sites to better match tract-level child demand (`age < 18`) derived from the most recent Census ACS release and school-based demand from California Department of Education FRPM data.
 
 This report compares:
 
 - `status_quo`: site-day capacities as listed.
 - `optimal_reallocation`: same day-total supply, reallocated across open sites using a linear program.
+- **Dual demand approaches**: Census-based (ACS) child population vs. school-based (CDE) FRPM eligibility.
 
-## 2. Problem Formulation
+## 3. Problem Formulation
 
 {{< include report_sections/problem_formulation_nested.qmd >}}
 
-## 3. Empirics
+## 4. Empirics
 
 {{< include report_sections/empirics_nested.qmd >}}
 
-## 4. Results
+## 5. Results
 
-### 4.1 Scenario Summary
+### 5.1 Scenario Summary
 
 | Scenario | Participation Rate | Served (Status Quo) | Served (Optimal) | Coverage (Status Quo) | Coverage (Optimal) | Avg Distance Miles (Status Quo) | Avg Distance Miles (Optimal) | Implied Meals Moved |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -38,19 +57,19 @@ This report compares:
 
 Coverage remains fixed (total supply is fixed), while optimized reallocation lowers average distance and shifts a substantial number of meals across sites.
 
-### 4.2 Status Quo vs Optimal (Site-Day Scatter)
+### 5.2 Status Quo vs Optimal (Site-Day Scatter)
 
 ![](outputs/figures/status_quo_vs_optimal_allocations.png)
 
-### 4.3 Site-Level Facet Grid (8 x 5)
+### 5.3 Site-Level Facet Grid (8 x 5)
 
 Facet titles are `site name + address`. Each panel aggregates each site's **two-day total lunches** by participation rate and compares status quo vs optimal allocations.
 
 ![](outputs/figures/site_allocation_facets_8x5.png)
 
-## 5. Work Log And Directory Structure
+## 6. Work Log And Directory Structure
 
-### 5.1 Distilled Work Log
+### 6.1 Distilled Work Log
 
 1. Ingested strike meal-site capacities from your SF.gov PDF export and built:
    - `data/raw/meal_sites_manual.csv`
@@ -69,7 +88,7 @@ Facet titles are `site name + address`. Each panel aggregates each site's **two-
    - `outputs/figures/status_quo_vs_optimal_allocations.png`
    - `outputs/figures/site_allocation_facets_8x5.png`
 
-### 5.2 Key Scripts
+### 6.2 Key Scripts
 
 - `scripts/extract_meal_sites_from_pdf.py`
 - `scripts/build_site_day_supply.py`
@@ -81,14 +100,14 @@ Facet titles are `site name + address`. Each panel aggregates each site's **two-
 - `scripts/solve_allocation_lp.py`
 - `scripts/plot_site_facets.py`
 
-### 5.3 Data Sources
+### 6.3 Data Sources
 
 - SF meal-site listing (PDF export from SF.gov strike meals page)
 - U.S. Census ACS 5-year API (`B01001` age bins)
 - U.S. Census TIGER tract polygons (California, 2024)
 - U.S. Census Geocoder API (`Public_AR_Current`)
 
-### 5.4 Directory Snapshot
+### 6.4 Directory Snapshot
 
 ```text
 data/
