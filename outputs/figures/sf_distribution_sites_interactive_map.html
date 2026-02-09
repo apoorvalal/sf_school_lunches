@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_893109a1a2cb551b92091e1fb573854d {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+    <div style="position: fixed; 
+        bottom: 50px; left: 50px; width: 220px; height: 200px; 
+        background-color: white; border:2px solid grey; z-index:9999; 
+        font-size:12px; font-family: Arial; padding: 10px;">
+        
+        <h4 style="margin-top: 0;">Meal Distribution Sites</h4>
+        
+        <p style="margin: 5px 0;"><strong>Marker color</strong> = ACS optimal meals:</p>
+        <div style="margin-left: 10px;">
+            <span style="color: red; font-weight: bold;">●</span> &gt; 1000 meals<br>
+            <span style="color: orange; font-weight: bold;">●</span> 500-1000 meals<br>
+            <span style="color: yellow; font-weight: bold;">●</span> 200-500 meals<br>
+            <span style="color: green; font-weight: bold;">●</span> &lt; 200 meals
+        </div>
+        
+        <hr style="margin: 8px 0;">
+        
+        <p style="margin: 5px 0;"><strong>Popup shows:</strong></p>
+        <div style="margin-left: 10px; font-size: 11px;">
+            <span style="color: #1f77b4;">■</span> SFUSD planned<br>
+            <span style="color: #ff7f0e;">■</span> ACS optimal<br>
+            <span style="color: #2ca02c;">■</span> CDE optimal
+        </div>
+    </div>
+    
+    
+            <div class="folium-map" id="map_893109a1a2cb551b92091e1fb573854d" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_893109a1a2cb551b92091e1fb573854d = L.map(
+                "map_893109a1a2cb551b92091e1fb573854d",
+                {
+                    center: [37.765, -122.45],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 12,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_165e89485ae6923d87b4c164e548987e = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_165e89485ae6923d87b4c164e548987e.addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+            var circle_marker_eb9d610b19b1d4b213d9f9c367fdbbd1 = L.circleMarker(
+                [37.759689004201, -122.4214570794],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_1f2259185311bb218624711417941649 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_eb5baef748617ef62cc0656bfd61fed0 = $(`<div id="html_eb5baef748617ef62cc0656bfd61fed0" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">826 Valencia - Main</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 30 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 50.0%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 0 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 0.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 60 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 100.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_1f2259185311bb218624711417941649.setContent(html_eb5baef748617ef62cc0656bfd61fed0);
+            
+        
+
+        circle_marker_eb9d610b19b1d4b213d9f9c367fdbbd1.bindPopup(popup_1f2259185311bb218624711417941649)
+        ;
+
+        
+    
+    
+            circle_marker_eb9d610b19b1d4b213d9f9c367fdbbd1.bindTooltip(
+                `<div>
+                     826 Valencia - Main<br>ACS: 0 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_89d2869528d971c52c0d01ca104cf931 = L.circleMarker(
+                [37.771764933736, -122.391347641226],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_726a4768a2377c341ba1bad3d86cc9f3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_281b154688309e45336d0f1c31b36236 = $(`<div id="html_281b154688309e45336d0f1c31b36236" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">826 Valencia - Mission Bay</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 30 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 100.0%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 0 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 0.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 0 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 0.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_726a4768a2377c341ba1bad3d86cc9f3.setContent(html_281b154688309e45336d0f1c31b36236);
+            
+        
+
+        circle_marker_89d2869528d971c52c0d01ca104cf931.bindPopup(popup_726a4768a2377c341ba1bad3d86cc9f3)
+        ;
+
+        
+    
+    
+            circle_marker_89d2869528d971c52c0d01ca104cf931.bindTooltip(
+                `<div>
+                     826 Valencia - Mission Bay<br>ACS: 0 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bbe23e302fd6da387b1dcad0203bd425 = L.circleMarker(
+                [37.781968232897, -122.413483855923],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_7bc605ffe30b138deacb9b7df15751c4 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e1b470951aeecdbc42cb1f6bd1a0d4ad = $(`<div id="html_e1b470951aeecdbc42cb1f6bd1a0d4ad" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">826 Valencia - Tenderloin</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 30 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 22.388059701492537%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 134 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 100.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 60 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 44.776119402985074%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_7bc605ffe30b138deacb9b7df15751c4.setContent(html_e1b470951aeecdbc42cb1f6bd1a0d4ad);
+            
+        
+
+        circle_marker_bbe23e302fd6da387b1dcad0203bd425.bindPopup(popup_7bc605ffe30b138deacb9b7df15751c4)
+        ;
+
+        
+    
+    
+            circle_marker_bbe23e302fd6da387b1dcad0203bd425.bindTooltip(
+                `<div>
+                     826 Valencia - Tenderloin<br>ACS: 134 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ac92205029c96f48856d30e0ed0473dc = L.circleMarker(
+                [37.732208113041, -122.389584090696],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_88af79bb03b1dacd5257e6a1b13726ec = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1d97004540e924e91f0fb6561a5a21bb = $(`<div id="html_1d97004540e924e91f0fb6561a5a21bb" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Bayview YMCA</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 150 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 100.0%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 0 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 0.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 39 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 26.133333333333336%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_88af79bb03b1dacd5257e6a1b13726ec.setContent(html_1d97004540e924e91f0fb6561a5a21bb);
+            
+        
+
+        circle_marker_ac92205029c96f48856d30e0ed0473dc.bindPopup(popup_88af79bb03b1dacd5257e6a1b13726ec)
+        ;
+
+        
+    
+    
+            circle_marker_ac92205029c96f48856d30e0ed0473dc.bindTooltip(
+                `<div>
+                     Bayview YMCA<br>ACS: 0 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_223a2a11c8af8c3b62988c0f4d416f45 = L.circleMarker(
+                [37.739000938111, -122.416457145151],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_9975777bb2569f39d6ab4e19b4d338f2 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e10739d11d9244f1508d3584ad4f0990 = $(`<div id="html_e10739d11d9244f1508d3584ad4f0990" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Bernal Heights Library</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 20 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 16.666666666666664%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 0 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 0.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 120 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 100.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_9975777bb2569f39d6ab4e19b4d338f2.setContent(html_e10739d11d9244f1508d3584ad4f0990);
+            
+        
+
+        circle_marker_223a2a11c8af8c3b62988c0f4d416f45.bindPopup(popup_9975777bb2569f39d6ab4e19b4d338f2)
+        ;
+
+        
+    
+    
+            circle_marker_223a2a11c8af8c3b62988c0f4d416f45.bindTooltip(
+                `<div>
+                     Bernal Heights Library<br>ACS: 0 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d511949ae7674b0fcd892407a1589ce9 = L.circleMarker(
+                [37.804492774564, -122.451653492311],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_5516f6580f8d818836b50c8408e0f45a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e22da5049ae61707488987c0a80fb148 = $(`<div id="html_e22da5049ae61707488987c0a80fb148" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Betty An Ong Recreation Center</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 30 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 100.0%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 0 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 0.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 25 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 83.33333333333334%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_5516f6580f8d818836b50c8408e0f45a.setContent(html_e22da5049ae61707488987c0a80fb148);
+            
+        
+
+        circle_marker_d511949ae7674b0fcd892407a1589ce9.bindPopup(popup_5516f6580f8d818836b50c8408e0f45a)
+        ;
+
+        
+    
+    
+            circle_marker_d511949ae7674b0fcd892407a1589ce9.bindTooltip(
+                `<div>
+                     Betty An Ong Recreation Center<br>ACS: 0 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0ab8260fdb814b0f0d69be1ee894a95f = L.circleMarker(
+                [37.72638367452, -122.432382713982],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_ea6a9c750ce28e58eb50af836c704d5e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_cfcd24bf274670ac68432699ffad2c12 = $(`<div id="html_cfcd24bf274670ac68432699ffad2c12" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Boys and Girls Clubs of SF - Excelsior Clubhouse</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 60 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 17.626321974148063%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 0 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 0.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 340 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 100.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_ea6a9c750ce28e58eb50af836c704d5e.setContent(html_cfcd24bf274670ac68432699ffad2c12);
+            
+        
+
+        circle_marker_0ab8260fdb814b0f0d69be1ee894a95f.bindPopup(popup_ea6a9c750ce28e58eb50af836c704d5e)
+        ;
+
+        
+    
+    
+            circle_marker_0ab8260fdb814b0f0d69be1ee894a95f.bindTooltip(
+                `<div>
+                     Boys and Girls Clubs of SF - Excelsior Clubhouse<br>ACS: 0 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_847896baf9ee900e0f0adde03c0d8de0 = L.circleMarker(
+                [37.751904984721, -122.410814980464],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_b2bd8ddf2c593926e5c8fe3f249d70b5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4eeb97312e3dcbe9eaf9521d32e1320c = $(`<div id="html_4eeb97312e3dcbe9eaf9521d32e1320c" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Buena Vista Child Care</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 40 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 16.666666666666664%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 240 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 100.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 240 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 100.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_b2bd8ddf2c593926e5c8fe3f249d70b5.setContent(html_4eeb97312e3dcbe9eaf9521d32e1320c);
+            
+        
+
+        circle_marker_847896baf9ee900e0f0adde03c0d8de0.bindPopup(popup_b2bd8ddf2c593926e5c8fe3f249d70b5)
+        ;
+
+        
+    
+    
+            circle_marker_847896baf9ee900e0f0adde03c0d8de0.bindTooltip(
+                `<div>
+                     Buena Vista Child Care<br>ACS: 240 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_102c565cfd6f431507c23627584da7cb = L.circleMarker(
+                [37.793354340498, -122.406809431299],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_f6d4cb5dbcb3323701ff0efec188f87c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e16cf71ff142f23894b5f14b2f77f282 = $(`<div id="html_e16cf71ff142f23894b5f14b2f77f282" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Community Youth Center - Chinatown</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 200 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 18.443378827001105%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 423 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 38.989302840280345%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 1084 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 100.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_f6d4cb5dbcb3323701ff0efec188f87c.setContent(html_e16cf71ff142f23894b5f14b2f77f282);
+            
+        
+
+        circle_marker_102c565cfd6f431507c23627584da7cb.bindPopup(popup_f6d4cb5dbcb3323701ff0efec188f87c)
+        ;
+
+        
+    
+    
+            circle_marker_102c565cfd6f431507c23627584da7cb.bindTooltip(
+                `<div>
+                     Community Youth Center - Chinatown<br>ACS: 423 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_97dfd50bd7e6adb5c4b3bd42a24240f3 = L.circleMarker(
+                [37.782773470768, -122.469530454484],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_9ff976faeecfa0fef4a12196fd4aa0b9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_192095ff0a01a8d8bfda3283aceecbdd = $(`<div id="html_192095ff0a01a8d8bfda3283aceecbdd" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Community Youth Center - Richmond</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 250 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 20.51871306631648%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 1218 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 100.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 381 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 31.25410374261326%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_9ff976faeecfa0fef4a12196fd4aa0b9.setContent(html_192095ff0a01a8d8bfda3283aceecbdd);
+            
+        
+
+        circle_marker_97dfd50bd7e6adb5c4b3bd42a24240f3.bindPopup(popup_9ff976faeecfa0fef4a12196fd4aa0b9)
+        ;
+
+        
+    
+    
+            circle_marker_97dfd50bd7e6adb5c4b3bd42a24240f3.bindTooltip(
+                `<div>
+                     Community Youth Center - Richmond<br>ACS: 1218 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b7e244ff56423ccc5efc5b9881facda5 = L.circleMarker(
+                [37.787009372125, -122.41893980772],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_f2ff42c496de21d3241220a164df25e6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9be80bc792020f27c6d7d0ff9cb97948 = $(`<div id="html_9be80bc792020f27c6d7d0ff9cb97948" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Community Youth Center - Tenderloin</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 100 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 16.93766937669377%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 590 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 100.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 187 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 31.70731707317073%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_f2ff42c496de21d3241220a164df25e6.setContent(html_9be80bc792020f27c6d7d0ff9cb97948);
+            
+        
+
+        circle_marker_b7e244ff56423ccc5efc5b9881facda5.bindPopup(popup_f2ff42c496de21d3241220a164df25e6)
+        ;
+
+        
+    
+    
+            circle_marker_b7e244ff56423ccc5efc5b9881facda5.bindTooltip(
+                `<div>
+                     Community Youth Center - Tenderloin<br>ACS: 590 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cd1159b0b21f0e8b20b4fbc38e3b1e89 = L.circleMarker(
+                [37.733834212138, -122.384640029279],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_337e919164f7955794a89f2670ffe819 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1854ba02ee6fe2ca6a01476d315d784d = $(`<div id="html_1854ba02ee6fe2ca6a01476d315d784d" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">FACES SF</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 200 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 17.041581458759374%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 1174 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 100.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 522 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 44.47852760736197%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_337e919164f7955794a89f2670ffe819.setContent(html_1854ba02ee6fe2ca6a01476d315d784d);
+            
+        
+
+        circle_marker_cd1159b0b21f0e8b20b4fbc38e3b1e89.bindPopup(popup_337e919164f7955794a89f2670ffe819)
+        ;
+
+        
+    
+    
+            circle_marker_cd1159b0b21f0e8b20b4fbc38e3b1e89.bindTooltip(
+                `<div>
+                     FACES SF<br>ACS: 1174 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7fd683c3ca667e3eb38d982ada5ca6d7 = L.circleMarker(
+                [37.717510347264, -122.386976217416],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_3885f8784e8ad3b85a4bbf789be37217 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0f0028314c681007c93ed2446a04dee0 = $(`<div id="html_0f0028314c681007c93ed2446a04dee0" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Gilman Playground</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 135 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 87.49189889825016%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 0 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 0.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 154 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 100.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_3885f8784e8ad3b85a4bbf789be37217.setContent(html_0f0028314c681007c93ed2446a04dee0);
+            
+        
+
+        circle_marker_7fd683c3ca667e3eb38d982ada5ca6d7.bindPopup(popup_3885f8784e8ad3b85a4bbf789be37217)
+        ;
+
+        
+    
+    
+            circle_marker_7fd683c3ca667e3eb38d982ada5ca6d7.bindTooltip(
+                `<div>
+                     Gilman Playground<br>ACS: 0 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_287f95b386b0d06516e75b4def5f9fc7 = L.circleMarker(
+                [37.784231055501, -122.434595838362],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_512e31bc3faf62cccb90d58550e5cc98 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b2a45d738eb02dce6745054f701526d0 = $(`<div id="html_b2a45d738eb02dce6745054f701526d0" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Hamilton Recreation Center</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 60 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 25.0%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 240 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 99.83333333333333%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 240 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 100.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_512e31bc3faf62cccb90d58550e5cc98.setContent(html_b2a45d738eb02dce6745054f701526d0);
+            
+        
+
+        circle_marker_287f95b386b0d06516e75b4def5f9fc7.bindPopup(popup_512e31bc3faf62cccb90d58550e5cc98)
+        ;
+
+        
+    
+    
+            circle_marker_287f95b386b0d06516e75b4def5f9fc7.bindTooltip(
+                `<div>
+                     Hamilton Recreation Center<br>ACS: 240 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4168cd4acf0aac65fe8618ae2896c213 = L.circleMarker(
+                [37.724038495591, -122.456417292402],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_9e62e2d6481ead8f6a2052f55b130b23 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1b37fda543dd8e739c7c8b01f6df767c = $(`<div id="html_1b37fda543dd8e739c7c8b01f6df767c" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Ingleside Library</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 20 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 50.0%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 40 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 100.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 0 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 0.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_9e62e2d6481ead8f6a2052f55b130b23.setContent(html_1b37fda543dd8e739c7c8b01f6df767c);
+            
+        
+
+        circle_marker_4168cd4acf0aac65fe8618ae2896c213.bindPopup(popup_9e62e2d6481ead8f6a2052f55b130b23)
+        ;
+
+        
+    
+    
+            circle_marker_4168cd4acf0aac65fe8618ae2896c213.bindTooltip(
+                `<div>
+                     Ingleside Library<br>ACS: 40 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a27979ad65ed9d2577299fba6f756086 = L.circleMarker(
+                [37.735247243101, -122.389661445771],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_e246f200f45486ff93f53abe3dc3e322 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d4afa00ea7614c32641a19f4630839ec = $(`<div id="html_d4afa00ea7614c32641a19f4630839ec" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Joseph Lee Recreation Center</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 120 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 27.76492364645997%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 432 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 100.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 0 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 0.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_e246f200f45486ff93f53abe3dc3e322.setContent(html_d4afa00ea7614c32641a19f4630839ec);
+            
+        
+
+        circle_marker_a27979ad65ed9d2577299fba6f756086.bindPopup(popup_e246f200f45486ff93f53abe3dc3e322)
+        ;
+
+        
+    
+    
+            circle_marker_a27979ad65ed9d2577299fba6f756086.bindTooltip(
+                `<div>
+                     Joseph Lee Recreation Center<br>ACS: 432 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cf324063854e39fd5205ae1422d14a03 = L.circleMarker(
+                [37.778721736617, -122.416518249896],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_e224c3204d1a73642488d8b929c84c51 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4d68beceb881c52094ed3d3e62333052 = $(`<div id="html_4d68beceb881c52094ed3d3e62333052" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Main Library</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 20 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 16.666666666666664%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 120 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 100.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 0 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 0.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_e224c3204d1a73642488d8b929c84c51.setContent(html_4d68beceb881c52094ed3d3e62333052);
+            
+        
+
+        circle_marker_cf324063854e39fd5205ae1422d14a03.bindPopup(popup_e224c3204d1a73642488d8b929c84c51)
+        ;
+
+        
+    
+    
+            circle_marker_cf324063854e39fd5205ae1422d14a03.bindTooltip(
+                `<div>
+                     Main Library<br>ACS: 120 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6042622e4650e33b33389c1e40e6353e = L.circleMarker(
+                [37.716186009067, -122.4589859382],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_d09cb3a28d97126583e5c6fc66c8073c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_794950eb29008e4f5d9f678f0d2a5526 = $(`<div id="html_794950eb29008e4f5d9f678f0d2a5526" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Minnie and Lovie Ward Recreation Center</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 30 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 16.666666666666664%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 180 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 100.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 106 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 59.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_d09cb3a28d97126583e5c6fc66c8073c.setContent(html_794950eb29008e4f5d9f678f0d2a5526);
+            
+        
+
+        circle_marker_6042622e4650e33b33389c1e40e6353e.bindPopup(popup_d09cb3a28d97126583e5c6fc66c8073c)
+        ;
+
+        
+    
+    
+            circle_marker_6042622e4650e33b33389c1e40e6353e.bindTooltip(
+                `<div>
+                     Minnie and Lovie Ward Recreation Center<br>ACS: 180 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_27cead36b966f3f85399537e4f43fdfa = L.circleMarker(
+                [37.765046198128, -122.420674106149],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_b697b4c140a43780433b4e15c464317e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e28f2ab9dfbfc7e593375f3c9cae51e1 = $(`<div id="html_e28f2ab9dfbfc7e593375f3c9cae51e1" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Mission Graduates</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 300 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 40.45307443365696%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 742 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 100.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 394 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 53.128371089536145%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_b697b4c140a43780433b4e15c464317e.setContent(html_e28f2ab9dfbfc7e593375f3c9cae51e1);
+            
+        
+
+        circle_marker_27cead36b966f3f85399537e4f43fdfa.bindPopup(popup_b697b4c140a43780433b4e15c464317e)
+        ;
+
+        
+    
+    
+            circle_marker_27cead36b966f3f85399537e4f43fdfa.bindTooltip(
+                `<div>
+                     Mission Graduates<br>ACS: 742 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5eba25da0a81fb06ecfb80681c172860 = L.circleMarker(
+                [37.720790457516, -122.437872031717],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_301adbc84640377ba59f30c36c5afcf1 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b7bfd69168d4f8264d979b32032ee798 = $(`<div id="html_b7bfd69168d4f8264d979b32032ee798" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Mission Language and Vocational School - Excelsior</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 100 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 16.666666666666664%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 0 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 0.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 600 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 100.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_301adbc84640377ba59f30c36c5afcf1.setContent(html_b7bfd69168d4f8264d979b32032ee798);
+            
+        
+
+        circle_marker_5eba25da0a81fb06ecfb80681c172860.bindPopup(popup_301adbc84640377ba59f30c36c5afcf1)
+        ;
+
+        
+    
+    
+            circle_marker_5eba25da0a81fb06ecfb80681c172860.bindTooltip(
+                `<div>
+                     Mission Language and Vocational School - Excelsior<br>ACS: 0 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3661859651a5d64e7d79695aace193e1 = L.circleMarker(
+                [37.76035919428, -122.411199860059],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_6aefa845b8c5880477d5663585f3fbf3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_293a7dd47a6ef7ad550437ae52540033 = $(`<div id="html_293a7dd47a6ef7ad550437ae52540033" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Mission Language and Vocational School - Main</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 400 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 29.616466755516065%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 1075 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 79.56463793869389%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 1351 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 100.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_6aefa845b8c5880477d5663585f3fbf3.setContent(html_293a7dd47a6ef7ad550437ae52540033);
+            
+        
+
+        circle_marker_3661859651a5d64e7d79695aace193e1.bindPopup(popup_6aefa845b8c5880477d5663585f3fbf3)
+        ;
+
+        
+    
+    
+            circle_marker_3661859651a5d64e7d79695aace193e1.bindTooltip(
+                `<div>
+                     Mission Language and Vocational School - Main<br>ACS: 1075 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_420b8ca5acf4736134a2a93d5a3f1bbc = L.circleMarker(
+                [37.728778853491, -122.40962706838],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_9d0ded3e17a84e60a1d57240b94a223b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f94dbc89564880ee9ed3ddae82e29113 = $(`<div id="html_f94dbc89564880ee9ed3ddae82e29113" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Palega Recreation Center</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 30 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 17.964071856287426%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 0 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 0.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 167 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 100.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_9d0ded3e17a84e60a1d57240b94a223b.setContent(html_f94dbc89564880ee9ed3ddae82e29113);
+            
+        
+
+        circle_marker_420b8ca5acf4736134a2a93d5a3f1bbc.bindPopup(popup_9d0ded3e17a84e60a1d57240b94a223b)
+        ;
+
+        
+    
+    
+            circle_marker_420b8ca5acf4736134a2a93d5a3f1bbc.bindTooltip(
+                `<div>
+                     Palega Recreation Center<br>ACS: 0 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1325dd145052565d22e643137fa50fe1 = L.circleMarker(
+                [37.732235821808, -122.49825901383],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_a755180ff4950f7f8298bf05f621d2e9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9170ceef608e2f32cc4d4351aa86d896 = $(`<div id="html_9170ceef608e2f32cc4d4351aa86d896" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Pomeroy Recreation & Rehabilitation Center</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 90 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 100.0%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 0 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 0.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 0 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 0.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_a755180ff4950f7f8298bf05f621d2e9.setContent(html_9170ceef608e2f32cc4d4351aa86d896);
+            
+        
+
+        circle_marker_1325dd145052565d22e643137fa50fe1.bindPopup(popup_a755180ff4950f7f8298bf05f621d2e9)
+        ;
+
+        
+    
+    
+            circle_marker_1325dd145052565d22e643137fa50fe1.bindTooltip(
+                `<div>
+                     Pomeroy Recreation & Rehabilitation Center<br>ACS: 0 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_97a325d998f3690199573ac93bb89fc6 = L.circleMarker(
+                [37.760008661148, -122.397461827613],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_033553d1bf2561013937048f72d7632b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3bc5ce82eb796ce2c776b1e7bc7cae4f = $(`<div id="html_3bc5ce82eb796ce2c776b1e7bc7cae4f" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Potrero Library</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 20 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 16.666666666666664%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 0 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 0.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 120 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 100.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_033553d1bf2561013937048f72d7632b.setContent(html_3bc5ce82eb796ce2c776b1e7bc7cae4f);
+            
+        
+
+        circle_marker_97a325d998f3690199573ac93bb89fc6.bindPopup(popup_033553d1bf2561013937048f72d7632b)
+        ;
+
+        
+    
+    
+            circle_marker_97a325d998f3690199573ac93bb89fc6.bindTooltip(
+                `<div>
+                     Potrero Library<br>ACS: 0 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a44d2d370b57ab971568043282259827 = L.circleMarker(
+                [37.726973035102, -122.406364396967],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_d10975d6f9a96fe95804530392406a4d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d844bebaa0da47b094ddc3ac02f5955f = $(`<div id="html_d844bebaa0da47b094ddc3ac02f5955f" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Portola Library</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 40 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 16.666666666666664%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 240 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 100.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 240 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 100.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_d10975d6f9a96fe95804530392406a4d.setContent(html_d844bebaa0da47b094ddc3ac02f5955f);
+            
+        
+
+        circle_marker_a44d2d370b57ab971568043282259827.bindPopup(popup_d10975d6f9a96fe95804530392406a4d)
+        ;
+
+        
+    
+    
+            circle_marker_a44d2d370b57ab971568043282259827.bindTooltip(
+                `<div>
+                     Portola Library<br>ACS: 240 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ab47da28b41708048f1cb16512856525 = L.circleMarker(
+                [37.71197138701, -122.416428498912],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_8d59c9c0517022f0cba291eca99198b6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4083e5d38409e2472aa51cf7c4b84fb3 = $(`<div id="html_4083e5d38409e2472aa51cf7c4b84fb3" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">R.O.C.K</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 110 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 27.48625687156422%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 140 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 34.982508745627186%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 400 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 100.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_8d59c9c0517022f0cba291eca99198b6.setContent(html_4083e5d38409e2472aa51cf7c4b84fb3);
+            
+        
+
+        circle_marker_ab47da28b41708048f1cb16512856525.bindPopup(popup_8d59c9c0517022f0cba291eca99198b6)
+        ;
+
+        
+    
+    
+            circle_marker_ab47da28b41708048f1cb16512856525.bindTooltip(
+                `<div>
+                     R.O.C.K<br>ACS: 140 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e2ad8b970f43da9ccdfbdd2d391334c1 = L.circleMarker(
+                [37.7134283322, -122.421693927626],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_21704c2ebd37f7d3c5b6d63f2a122739 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7a3ce74cb57699c2499e129588b8e85c = $(`<div id="html_7a3ce74cb57699c2499e129588b8e85c" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Samoan Community Development Center</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 90 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 75.0%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 120 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 100.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 2 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 1.4999999999999998%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_21704c2ebd37f7d3c5b6d63f2a122739.setContent(html_7a3ce74cb57699c2499e129588b8e85c);
+            
+        
+
+        circle_marker_e2ad8b970f43da9ccdfbdd2d391334c1.bindPopup(popup_21704c2ebd37f7d3c5b6d63f2a122739)
+        ;
+
+        
+    
+    
+            circle_marker_e2ad8b970f43da9ccdfbdd2d391334c1.bindTooltip(
+                `<div>
+                     Samoan Community Development Center<br>ACS: 120 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7adde777124ac1fb0441573d2c3b647f = L.circleMarker(
+                [37.733962496162, -122.422373862115],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_afb0b49b39f239a4242d2458524226a7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4a7ffd45192c35e495a39570749e9782 = $(`<div id="html_4a7ffd45192c35e495a39570749e9782" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">St. Mary's Recreation Center</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 30 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 16.666666666666664%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 180 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 100.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 166 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 92.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_afb0b49b39f239a4242d2458524226a7.setContent(html_4a7ffd45192c35e495a39570749e9782);
+            
+        
+
+        circle_marker_7adde777124ac1fb0441573d2c3b647f.bindPopup(popup_afb0b49b39f239a4242d2458524226a7)
+        ;
+
+        
+    
+    
+            circle_marker_7adde777124ac1fb0441573d2c3b647f.bindTooltip(
+                `<div>
+                     St. Mary's Recreation Center<br>ACS: 180 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1eafcb3c98874316a74f7545b4f31fad = L.circleMarker(
+                [37.757481794392, -122.486450781969],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_4403e12b948be4a7a5265f6afbcf05bb = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ff3e74bb4a8334cf07616ff4d26156aa = $(`<div id="html_ff3e74bb4a8334cf07616ff4d26156aa" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Sunset Recreation Center</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 30 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 47.39336492890995%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 0 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 0.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 63 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 100.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_4403e12b948be4a7a5265f6afbcf05bb.setContent(html_ff3e74bb4a8334cf07616ff4d26156aa);
+            
+        
+
+        circle_marker_1eafcb3c98874316a74f7545b4f31fad.bindPopup(popup_4403e12b948be4a7a5265f6afbcf05bb)
+        ;
+
+        
+    
+    
+            circle_marker_1eafcb3c98874316a74f7545b4f31fad.bindTooltip(
+                `<div>
+                     Sunset Recreation Center<br>ACS: 0 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2d697d204f26d9a87fdb5eb1a263603c = L.circleMarker(
+                [37.803807162958, -122.412399328468],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_8a7b10efa61ef91ee519e86683803e6a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ceeeca56727b1c36a5ac025a405c27f4 = $(`<div id="html_ceeeca56727b1c36a5ac025a405c27f4" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">TEL HI Neighborhood Center - Site 1</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 270 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 39.37007874015748%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 686 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 100.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 563 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 82.15223097112862%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_8a7b10efa61ef91ee519e86683803e6a.setContent(html_ceeeca56727b1c36a5ac025a405c27f4);
+            
+        
+
+        circle_marker_2d697d204f26d9a87fdb5eb1a263603c.bindPopup(popup_8a7b10efa61ef91ee519e86683803e6a)
+        ;
+
+        
+    
+    
+            circle_marker_2d697d204f26d9a87fdb5eb1a263603c.bindTooltip(
+                `<div>
+                     TEL HI Neighborhood Center - Site 1<br>ACS: 686 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a94b8d429bf95727c90fcfc42e11f133 = L.circleMarker(
+                [37.805226052628, -122.416315204651],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_21d4f8e636511da3624ac478b1dfff04 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6494048381d8db6ef8b41f4724c861cf = $(`<div id="html_6494048381d8db6ef8b41f4724c861cf" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">TEL HI Neighborhood Center - Site 2</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 150 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 100.0%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 0 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 0.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 0 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 0.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_21d4f8e636511da3624ac478b1dfff04.setContent(html_6494048381d8db6ef8b41f4724c861cf);
+            
+        
+
+        circle_marker_a94b8d429bf95727c90fcfc42e11f133.bindPopup(popup_21d4f8e636511da3624ac478b1dfff04)
+        ;
+
+        
+    
+    
+            circle_marker_a94b8d429bf95727c90fcfc42e11f133.bindTooltip(
+                `<div>
+                     TEL HI Neighborhood Center - Site 2<br>ACS: 0 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a347139fe3c709df804f28dedfebbe55 = L.circleMarker(
+                [37.802968281678, -122.412390518881],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_3b2108bdb94b96c4e5f165f2b8576ea7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_de72f57ce2793ccc97aa7b8f3dfccd76 = $(`<div id="html_de72f57ce2793ccc97aa7b8f3dfccd76" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">TEL HI Neighborhood Center - Site 3</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 150 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 18.400392541707554%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 815 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 100.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 131 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 16.11874386653582%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_3b2108bdb94b96c4e5f165f2b8576ea7.setContent(html_de72f57ce2793ccc97aa7b8f3dfccd76);
+            
+        
+
+        circle_marker_a347139fe3c709df804f28dedfebbe55.bindPopup(popup_3b2108bdb94b96c4e5f165f2b8576ea7)
+        ;
+
+        
+    
+    
+            circle_marker_a347139fe3c709df804f28dedfebbe55.bindTooltip(
+                `<div>
+                     TEL HI Neighborhood Center - Site 3<br>ACS: 815 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bd4c4d834cb7f3ad83d5d21df3962896 = L.circleMarker(
+                [37.755750768329, -122.42108178014],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_b7ba5f66172a7ee41d915cd7a6d16b63 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3971fe405b86f461a9b095250a66e3bf = $(`<div id="html_3971fe405b86f461a9b095250a66e3bf" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">The Marsh</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 240 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 36.85503685503686%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 63 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 9.735872235872238%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 651 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 100.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_b7ba5f66172a7ee41d915cd7a6d16b63.setContent(html_3971fe405b86f461a9b095250a66e3bf);
+            
+        
+
+        circle_marker_bd4c4d834cb7f3ad83d5d21df3962896.bindPopup(popup_b7ba5f66172a7ee41d915cd7a6d16b63)
+        ;
+
+        
+    
+    
+            circle_marker_bd4c4d834cb7f3ad83d5d21df3962896.bindTooltip(
+                `<div>
+                     The Marsh<br>ACS: 63 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_faac1f520d51d4c89699718f571791ca = L.circleMarker(
+                [37.77528086996, -122.489832280743],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_09b8b744dab810cbd93825229b3896d5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_cd4cfe82ffffed597196dd30a1d2b7e9 = $(`<div id="html_cd4cfe82ffffed597196dd30a1d2b7e9" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">The Richmond Neighborhood Center</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 300 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 17.657445556209534%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 784 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 46.133019423190106%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 1699 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 100.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_09b8b744dab810cbd93825229b3896d5.setContent(html_cd4cfe82ffffed597196dd30a1d2b7e9);
+            
+        
+
+        circle_marker_faac1f520d51d4c89699718f571791ca.bindPopup(popup_09b8b744dab810cbd93825229b3896d5)
+        ;
+
+        
+    
+    
+            circle_marker_faac1f520d51d4c89699718f571791ca.bindTooltip(
+                `<div>
+                     The Richmond Neighborhood Center<br>ACS: 784 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_386a619abb9426ba36cdff78d48a0035 = L.circleMarker(
+                [37.784568036442, -122.415607643162],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_2be0cb4caa32b409c91c446e805036aa = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_76fcf1607d6cee0dc7be2b44cfd058eb = $(`<div id="html_76fcf1607d6cee0dc7be2b44cfd058eb" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">UP ON TOP</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 200 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 22.22222222222222%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 900 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 100.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 293 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 32.599999999999994%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_2be0cb4caa32b409c91c446e805036aa.setContent(html_76fcf1607d6cee0dc7be2b44cfd058eb);
+            
+        
+
+        circle_marker_386a619abb9426ba36cdff78d48a0035.bindPopup(popup_2be0cb4caa32b409c91c446e805036aa)
+        ;
+
+        
+    
+    
+            circle_marker_386a619abb9426ba36cdff78d48a0035.bindTooltip(
+                `<div>
+                     UP ON TOP<br>ACS: 900 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e68fb031548aba6dc76ee5e277484c47 = L.circleMarker(
+                [37.729198485584, -122.384272498464],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_d1b8d9b153df72beae62eea76c5f290c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2fee53f2e62db39be4643c8cd46cfbf4 = $(`<div id="html_2fee53f2e62db39be4643c8cd46cfbf4" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Vision Academy - Bayview</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 60 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 25.0%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 240 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 100.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 0 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 0.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_d1b8d9b153df72beae62eea76c5f290c.setContent(html_2fee53f2e62db39be4643c8cd46cfbf4);
+            
+        
+
+        circle_marker_e68fb031548aba6dc76ee5e277484c47.bindPopup(popup_d1b8d9b153df72beae62eea76c5f290c)
+        ;
+
+        
+    
+    
+            circle_marker_e68fb031548aba6dc76ee5e277484c47.bindTooltip(
+                `<div>
+                     Vision Academy - Bayview<br>ACS: 240 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b11e0a6d2d6abfe61db770bc0d612890 = L.circleMarker(
+                [37.712514917319, -122.407440466297],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_f654bf98552c6cf3129eaad28c6bbc00 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8aadc2db77a2443472fb565b36636482 = $(`<div id="html_8aadc2db77a2443472fb565b36636482" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Visitacion Valley Library</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 30 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 16.666666666666664%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 180 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 100.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 180 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 100.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_f654bf98552c6cf3129eaad28c6bbc00.setContent(html_8aadc2db77a2443472fb565b36636482);
+            
+        
+
+        circle_marker_b11e0a6d2d6abfe61db770bc0d612890.bindPopup(popup_f654bf98552c6cf3129eaad28c6bbc00)
+        ;
+
+        
+    
+    
+            circle_marker_b11e0a6d2d6abfe61db770bc0d612890.bindTooltip(
+                `<div>
+                     Visitacion Valley Library<br>ACS: 180 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_19eafd9f492373e0649cebc70af816e2 = L.circleMarker(
+                [37.717830045211, -122.469907289366],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_53cf45785863bbd640fbfd3ca37418b5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_42c927c5c6abb9fcb3372ef8273dfb43 = $(`<div id="html_42c927c5c6abb9fcb3372ef8273dfb43" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Youth 1st</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 150 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 79.11392405063292%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 190 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 100.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 85 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 44.620253164556964%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_53cf45785863bbd640fbfd3ca37418b5.setContent(html_42c927c5c6abb9fcb3372ef8273dfb43);
+            
+        
+
+        circle_marker_19eafd9f492373e0649cebc70af816e2.bindPopup(popup_53cf45785863bbd640fbfd3ca37418b5)
+        ;
+
+        
+    
+    
+            circle_marker_19eafd9f492373e0649cebc70af816e2.bindTooltip(
+                `<div>
+                     Youth 1st<br>ACS: 190 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_901ddc5c47a5ca2fc26d5e5d84f179d7 = L.circleMarker(
+                [37.765842857864, -122.419817114427],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_ce487670dc64228f98d1434f7f428759 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_de4fece56795c530fd1185392b5db358 = $(`<div id="html_de4fece56795c530fd1185392b5db358" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Youth Art Exchange - Site 1</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 85 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 100.0%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 0 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 0.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 0 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 0.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_ce487670dc64228f98d1434f7f428759.setContent(html_de4fece56795c530fd1185392b5db358);
+            
+        
+
+        circle_marker_901ddc5c47a5ca2fc26d5e5d84f179d7.bindPopup(popup_ce487670dc64228f98d1434f7f428759)
+        ;
+
+        
+    
+    
+            circle_marker_901ddc5c47a5ca2fc26d5e5d84f179d7.bindTooltip(
+                `<div>
+                     Youth Art Exchange - Site 1<br>ACS: 0 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d9ea41ef06fd0ccc1dda899bf003b9be = L.circleMarker(
+                [37.721026185883, -122.447719634832],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_893109a1a2cb551b92091e1fb573854d);
+        
+    
+        var popup_7b4383fc86ace29cefe1fd63435210f1 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ec3db3ebaef9927f42e99344503e7ad4 = $(`<div id="html_ec3db3ebaef9927f42e99344503e7ad4" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial; font-size: 12px; width: 250px;">             <h4 style="margin: 0 0 10px 0; color: #1f77b4;">Youth Art Exchange - Site 2</h4>                  <div style="width: 220px; font-family: Arial, sans-serif; font-size: 11px;">         <div style="margin-bottom: 8px;">             <strong style="color: #1f77b4;">SFUSD Planned</strong>: 80 meals             <div style="background-color: #e6f2ff; height: 8px; margin-top: 2px;">                 <div style="background-color: #1f77b4; height: 100%; width: 16.666666666666664%;"></div>             </div>         </div>         <div style="margin-bottom: 8px;">             <strong style="color: #ff7f0e;">ACS Optimal</strong>: 0 meals             <div style="background-color: #ffe6cc; height: 8px; margin-top: 2px;">                 <div style="background-color: #ff7f0e; height: 100%; width: 0.0%;"></div>             </div>         </div>         <div>             <strong style="color: #2ca02c;">CDE Optimal</strong>: 480 meals             <div style="background-color: #e6ffe6; height: 8px; margin-top: 2px;">                 <div style="background-color: #2ca02c; height: 100%; width: 100.0%;"></div>             </div>         </div>     </div>              </div>         </div>`)[0];
+                popup_7b4383fc86ace29cefe1fd63435210f1.setContent(html_ec3db3ebaef9927f42e99344503e7ad4);
+            
+        
+
+        circle_marker_d9ea41ef06fd0ccc1dda899bf003b9be.bindPopup(popup_7b4383fc86ace29cefe1fd63435210f1)
+        ;
+
+        
+    
+    
+            circle_marker_d9ea41ef06fd0ccc1dda899bf003b9be.bindTooltip(
+                `<div>
+                     Youth Art Exchange - Site 2<br>ACS: 0 meals
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>
