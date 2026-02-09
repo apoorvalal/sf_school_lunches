@@ -317,7 +317,7 @@ Table: Optimal meals allocated to each site (summed across days and participatio
 
 #### 9.3 Allocation Comparison Visualization
 
-![Scatterplot: ACS vs. CDE Optimal Meal Allocations by Site-Day](../outputs/figures/acs_vs_cde_allocations_scatter.png)
+![Scatterplot: ACS vs. CDE Optimal Meal Allocations by Site-Day](outputs/figures/acs_vs_cde_allocations_scatter.png)
 
 **Interpretation:**
 - Each point represents a site-day-scenario combination (189 total points across 40 sites, 2 days, 3 scenarios).
